@@ -42,7 +42,7 @@ export class MenuComponent implements OnInit {
         icon: 'pi pi-sitemap',
         items:[{
           label:'Roles',
-          routerLink:'roles'
+          routerLink:'Roles'
         },
         {
           label:'Copia de seguridad',

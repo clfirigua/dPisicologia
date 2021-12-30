@@ -8,3 +8,9 @@ html,body{
 .text-layout{
     color: var(--text-color);
 }
+ p{
+     color: white;
+ }
+ pre{
+     color: white;
+ }
