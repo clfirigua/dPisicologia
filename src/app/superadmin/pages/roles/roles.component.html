@@ -1,19 +1,8 @@
-<p>Panel</p>
-<p-selectButton [options]="panelValue" [(ngModel)]="panel" optionLabel="label" (click)="validar(0)" optionValue="value"></p-selectButton> 
-<p>usuarios</p>
-<p-selectButton [options]="usuariosValue" [(ngModel)]="usuarios" optionLabel="label" (click)="validar(1)" optionValue="value"></p-selectButton> 
-<p>cuentas</p>
-<p-selectButton [options]="cuentasValue" [(ngModel)]="cuentas" optionLabel="label" (click)="validar(2)" optionValue="value"></p-selectButton> 
-<p>roles</p>
-<p-selectButton [options]="rolesValue" [(ngModel)]="roles" optionLabel="label" (click)="validar(3)" optionValue="value"></p-selectButton> 
-<p>formulario</p>
-<p-selectButton [options]="formularioValue" [(ngModel)]="formulario" optionLabel="label" (click)="validar(4)" optionValue="value"></p-selectButton> 
-<p>informes</p>
-<p-selectButton [options]="informesValue" [(ngModel)]="informes" optionLabel="label" (click)="validar(5)" optionValue="value"></p-selectButton> 
-<p>informes</p>
-<p-selectButton [options]="papeleraValue" [(ngModel)]="papelera" optionLabel="label" (click)="validar(6)" optionValue="value"></p-selectButton> 
-<p>Menu de pruebas</p>
-<!-- <p-menubar [model]="items" name="items" ></p-menubar> -->
+<div *ngFor="let datos of campos; let i=index">
+    <p>{{datos.label}}</p>
+    <p-selectButton [options]="valores" [(ngModel)]="datos.estado" optionLabel="label" (click)="validar(i,datos.estado,datos.label)" optionValue="value"></p-selectButton> 
+</div>
+
 <pre>
     {{items|json}}
 </pre>

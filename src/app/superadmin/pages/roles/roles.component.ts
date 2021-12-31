@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SelectItem, PrimeNGConfig, MenuItem } from "primeng/api";
+import { PrimeNGConfig, MenuItem } from "primeng/api";
+import { RolesService } from '../../services/roles/roles.service';
+
 @Component({
   selector: 'app-roles',
   templateUrl: './roles.component.html',
@@ -7,148 +9,50 @@ import { SelectItem, PrimeNGConfig, MenuItem } from "primeng/api";
   ]
 })
 export class RolesComponent implements OnInit {
+  campos:any;
   items: MenuItem[] = [];
   valores: any = [{ label: 'Off', value: 'off' }, { label: 'On', value: 'on' }]
-  panelValue: any[] = this.valores;
-  usuariosValue: any[] = this.valores;
-  cuentasValue: any[] = this.valores;
-  rolesValue: any[] = this.valores;
-  papeleraValue: any[] = this.valores;
-  formularioValue: any[] = this.valores;
-  informesValue: any[] = this.valores;
-  panel: string = "off";
-  usuarios: string = "off";
-  cuentas: string = "off";
-  roles: string = "off";
-  papelera: string = "off";
-  formulario: string = "off";
-  informes: string = "off";
 
-  constructor(private primeNGConfig: PrimeNGConfig) { }
+  constructor( private roles:RolesService) { }
 
   ngOnInit(): void {
-    this.primeNGConfig.ripple = true;
+    this.campos = this.roles.formatoRoles();
   }
-  validar(index: number) {
+
+  validar(index: number,estado:string,label:string) {
     switch (index) {
       case 0:
-        if(this.panel== 'on'){
-          this.items.push({
-            label: 'Panel',
-            icon: 'pi pi-chart-bar',
-            routerLink:'panel'
-          })
-        }else{
-          this.buscarEliminar('Panel');
-        }
+        this.validarCondicion(estado,index,label)
         break;
       case 1:
-        if(this.usuarios== 'on'){
-          this.items.push( {
-            label: 'Usuarios',
-            icon: 'pi pi-user',
-            items:[
-              {
-                label: 'Lista usuarios',
-                icon: 'pi pi-align-justify',
-                routerLink:'usuarios'
-              },
-              {
-                label: 'Crear usuario',
-                icon: 'pi pi-user',
-                routerLink:'cusuarios'
-              }
-            ]
-            
-          })
-        }else{
-          this.buscarEliminar('Usuarios');
-        }
+        this.validarCondicion(estado,index,label)
         break;
       case 2:
-        if(this.cuentas== 'on'){
-          this.items.push({
-            label: 'Cuentas',
-            icon: 'pi pi-sitemap',
-            items:[
-            {
-              label:'Copia de seguridad',
-              icon: 'pi pi-shield',
-              routerLink:'cseguridad'
-            },
-            {
-              label:'Cargar usuarios',
-              icon: 'pi pi-file-excel',
-              routerLink:'cusuarios'
-            },
-            {
-              label:'exportar usuarios',
-              icon: 'pi pi-file-excel',
-              routerLink:'exportar'
-            }
-          ]
-            
-        })
-        }else{
-          this.buscarEliminar('Cuentas');
-        }
+        this.validarCondicion(estado,index,label)
         break;
       case 3:
-        if(this.roles== 'on'){
-          this.items.push({
-            label:'Roles',
-            routerLink:'Roles'
-          })
-        }else{
-          this.buscarEliminar('Roles');
-        }
+        this.validarCondicion(estado,index,label)
         break;
       case 4:
-        if(this.formulario == 'on'){
-          this.items.push({
-            label:'Formularios',
-            items:[
-              {
-                label:'Crear formulario',
-                icon:'pi pi-plus',
-                routerLink:'cformulario'
-              },
-              {
-                label:'Asignar formulario',
-                icon:'pi pi-sitemap',
-                routerLink:'aformulario'
-              }
-            ]
-          })
-        }else{
-          this.buscarEliminar('Formularios');
-        }
+        this.validarCondicion(estado,index,label)
         break;
       case 5:
-        if(this.informes== 'on'){
-          this.items.push( {
-            label:'informes',
-            icon:'pi pi-file',
-            routerLink:'informes'
-          } )
-        }else{
-          this.buscarEliminar('informes');
-        }
+        this.validarCondicion(estado,index,label)
         break;
       case 6:
-        if(this.papelera== 'on'){
-          this.items.push( {
-            label: 'Papelera',
-            icon:'pi pi-replay',
-            routerLink:'papelera'
-          })
-        }else{
-          this.buscarEliminar('Papelera');
-        }
+        this.validarCondicion(estado,index,label)
         break;
     }
   }
-
+  validarCondicion(estado:string, index:number, label:string){
+    if(estado == 'on'){
+      if(this.buscarGuardar(label)){
+        this.items.push(this.roles.getMenu(index))
+      }
+    }else{
+      this.buscarEliminar(label);
+    }
+  }
   buscarEliminar(dta:string){
     if(this.items.length == 0){
       return
@@ -159,6 +63,26 @@ export class RolesComponent implements OnInit {
       }
     });
   }
+
+  buscarGuardar(label:string):boolean{
+    let estado:boolean = false;
+    let cont:number = 0;
+    if(this.items.length == 0){
+       return estado=true
+    }
+    this.items.forEach(dta=>{
+      if(label == dta.label){
+        estado=false;
+        cont=1;
+      }
+      if(cont == 0){
+        estado= true
+      }
+    })
+    console.log(estado)
+    return estado
+  }
+ 
 }
 
 
