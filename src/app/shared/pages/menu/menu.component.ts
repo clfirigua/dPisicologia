@@ -32,7 +32,7 @@ export class MenuComponent implements OnInit {
           {
             label: 'Crear usuario',
             icon: 'pi pi-user',
-            routerLink:'cusuarios'
+            routerLink:'Cusuarios'
           }
         ]
         

@@ -1,0 +1,51 @@
+<h1>Registro Usuarios</h1>
+<hr>
+<form (ngSubmit)="guardar()" [formGroup]="miFormulario">
+    <!-- nombre -->
+    <div>
+        <label >Nombre</label>
+        <input formControlName="nombre" type="text">
+    </div>
+    <!-- apellido -->
+    <div>
+        <label >Apellido</label>
+        <input  formControlName="apellido" type="text">
+    </div>
+    <!-- correo -->
+    <div>
+        <label >Correo</label>
+        <input formControlName="correo" type="text">
+    </div>
+    <!-- identificacion CC -->
+    <div>
+        <label >Identificacion</label>
+        <input formControlName="identificacion" type="text">
+    </div>
+    <!-- genero -->
+    <!-- TODO:carga dinamica -->
+    <div>
+        <label >genero</label>
+        <input type="text">
+    </div>
+    <!-- direccion -->
+    <div>
+        <label >Direccion</label>
+        <input formControlName="direccion" type="text">
+    </div>
+    <!-- Rol -->
+    <!-- TODO: carga dinamica -->
+    <div>
+        <label >Rol</label>
+        <input type="text">
+    </div>
+    <button type="submit">Guardar</button>
+</form>
+
+<div>
+    <h2>Estados</h2>
+    <pre>{{miFormulario.errors |json}}</pre>
+</div>
+<div>
+    <h2>Validar</h2>
+    <pre>{{miFormulario.valid |json}}</pre>
+</div>
