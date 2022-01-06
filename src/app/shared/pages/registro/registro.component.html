@@ -1,44 +1,13 @@
 <h1>Registro Usuarios</h1>
 <hr>
 <form (ngSubmit)="guardar()" [formGroup]="miFormulario">
-    <!-- nombre -->
-    <div>
-        <label >Nombre</label>
-        <input formControlName="nombre" type="text">
+    <div class="mb-3 row">
+        <label class="col-2 col-form-label">Nombre</label>
+        <div class="col-10">
+            <input type="text" class="form-control" placeholder="Nombre de la persona" formControlName="nombre" >
+            <span  *ngIf="validar('nombre')" class="form-text text-danger">este campo es obligatorio</span>
+        </div>
     </div>
-    <!-- apellido -->
-    <div>
-        <label >Apellido</label>
-        <input  formControlName="apellido" type="text">
-    </div>
-    <!-- correo -->
-    <div>
-        <label >Correo</label>
-        <input formControlName="correo" type="text">
-    </div>
-    <!-- identificacion CC -->
-    <div>
-        <label >Identificacion</label>
-        <input formControlName="identificacion" type="text">
-    </div>
-    <!-- genero -->
-    <!-- TODO:carga dinamica -->
-    <div>
-        <label >genero</label>
-        <input type="text">
-    </div>
-    <!-- direccion -->
-    <div>
-        <label >Direccion</label>
-        <input formControlName="direccion" type="text">
-    </div>
-    <!-- Rol -->
-    <!-- TODO: carga dinamica -->
-    <div>
-        <label >Rol</label>
-        <input type="text">
-    </div>
-    <button type="submit">Guardar</button>
 </form>
 
 <div>
