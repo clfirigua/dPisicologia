@@ -73,7 +73,7 @@ export class MenuComponent implements OnInit {
         {
           label:'Crear formulario',
           icon:'pi pi-plus',
-          routerLink:'cformulario'
+          routerLink:'Formularios',
         },
         {
           label:'Asignar formulario',
