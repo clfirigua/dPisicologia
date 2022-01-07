@@ -1,8 +1,80 @@
-<div *ngFor="let datos of campos; let i=index">
-    <p>{{datos.label}}</p>
-    <p-selectButton [options]="valores" [(ngModel)]="datos.estado" optionLabel="label" (click)="validar(i,datos.estado,datos.label)" optionValue="value"></p-selectButton> 
-</div>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-6">
+            <!-- <div class="row border border-primary mb-3" >
+               <div class="col-8">
+                   <h5>Nombre Formulario</h5>
+                   <p>Descripcion</p>
+               </div>
+               <div class="col-4">
+                   <button class="btn btn-primary">Edit</button>
+                   <button class="btn btn-danger">Delete</button>
+               </div>
+            </div> -->
+        </div>
+        <!-- Formulario Roles -->
+        <div class="col-6">
+            <form [formGroup]="miFormulario">
+                <!-- nombre -->
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Roles Usuarios</label>
+                    <input formControlName="nombre" type="text" class="form-control" placeholder="Pruebas">
+                    <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <!-- panel -->
+                        <div class="mb-3 form-check">
+                            <input formControlName="panel" type="checkbox" class="form-check-input" id="panel">
+                            <label  class="form-check-label" for="panel">Panel</label>
+                        </div>
+                        <!-- usuarios -->
+                        <div class="mb-3 form-check">
+                            <input formControlName="usuario" type="checkbox" class="form-check-input" id="usuario">
+                            <label  class="form-check-label" for="usuario">Usuarios</label>
+                        </div>
+                        <!-- Cuentas -->
+                        <div class="mb-3 form-check">
+                            <input  formControlName="cuentas" type="checkbox" class="form-check-input" id="cuentas">
+                            <label class="form-check-label" for="cuentas">Cuentas</label>
+                        </div>
+                        <!-- formularios -->
+                        <div class="mb-3 form-check">
+                            <input formControlName="formulario" type="checkbox" class="form-check-input" id="formulario">
+                            <label  class="form-check-label" for="formulario">Formularios</label>
+                        </div>
 
-<pre>
-    {{items|json}}
-</pre>
+                    </div>
+                    <div class="col-6">
+                        <!-- informes -->
+                        <div class="mb-3 form-check">
+                            <input formControlName="informes" type="checkbox" class="form-check-input" id="informes">
+                            <label  class="form-check-label" for="informes">Informes</label>
+                        </div>
+                        <!-- cuentas -->
+                        <div class="mb-3 form-check">
+                            <input formControlName="cuentas"  type="checkbox" class="form-check-input" id="cuentas">
+                            <label class="form-check-label" for="cuentas">Cuentas</label>
+                        </div>
+                        <!-- papelera -->
+                        <div class="mb-3 form-check">
+                            <input formControlName="papelera"  type="checkbox" class="form-check-input" id="papelera">
+                            <label class="form-check-label" for="papelera">Papelera</label>
+                        </div>
+                        <!-- roles -->
+                        <div class="mb-3 form-check">
+                            <input formControlName="roles" type="checkbox" class="form-check-input" id="roles">
+                            <label  class="form-check-label" for="roles">Roles</label>
+                        </div>
+                    </div>
+                    <pre>{{miFormulario.value |json}}</pre>
+
+                </div>
+
+                <div class="col">
+                    <button type="submit" class="btn btn-primary float-end">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

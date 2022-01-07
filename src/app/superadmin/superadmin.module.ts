@@ -6,7 +6,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { SharedModule } from '../shared/shared.module';
 import { RolesComponent } from './pages/roles/roles.component';
 import { PrimengModule } from '../primeng/primeng.module';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+
 
 
 
@@ -20,7 +21,8 @@ import {FormsModule} from '@angular/forms';
     SuperadminRoutingModule,
     SharedModule,
     PrimengModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class SuperadminModule { }

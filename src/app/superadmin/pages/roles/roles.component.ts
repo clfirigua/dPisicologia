@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PrimeNGConfig, MenuItem } from "primeng/api";
-import { RolesService } from '../../services/roles/roles.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-roles',
@@ -9,79 +9,26 @@ import { RolesService } from '../../services/roles/roles.service';
   ]
 })
 export class RolesComponent implements OnInit {
-  campos:any;
-  items: MenuItem[] = [];
-  valores: any = [{ label: 'Off', value: 'off' }, { label: 'On', value: 'on' }]
+  miFormulario:FormGroup = this.fb.group({
+    nombre:['', Validators.required],
+    panel:[false],
+    usuario:[false],
+    cuentas:[false],
+    formulario:[false],
+    informes:[false],
+    papelera:[false],
+    roles:[false],
 
-  constructor( private roles:RolesService) { }
+  })
+  constructor( private fb: FormBuilder ) { }
 
   ngOnInit(): void {
-    this.campos = this.roles.formatoRoles();
+    // this.miFormulario.reset({
+    //   panel:true
+    // })
   }
 
-  validar(index: number,estado:string,label:string) {
-    switch (index) {
-      case 0:
-        this.validarCondicion(estado,index,label)
-        break;
-      case 1:
-        this.validarCondicion(estado,index,label)
-        break;
-      case 2:
-        this.validarCondicion(estado,index,label)
-        break;
-      case 3:
-        this.validarCondicion(estado,index,label)
-        break;
-      case 4:
-        this.validarCondicion(estado,index,label)
-        break;
-      case 5:
-        this.validarCondicion(estado,index,label)
-        break;
-      case 6:
-        this.validarCondicion(estado,index,label)
-        break;
-    }
-  }
-  validarCondicion(estado:string, index:number, label:string){
-    if(estado == 'on'){
-      if(this.buscarGuardar(label)){
-        this.items.push(this.roles.getMenu(index))
-      }
-    }else{
-      this.buscarEliminar(label);
-    }
-  }
-  buscarEliminar(dta:string){
-    if(this.items.length == 0){
-      return
-    }
-    this.items.forEach((valor, index)=>{
-      if(valor.label == dta){
-        this.items.splice(index, 1);
-      }
-    });
-  }
-
-  buscarGuardar(label:string):boolean{
-    let estado:boolean = false;
-    let cont:number = 0;
-    if(this.items.length == 0){
-       return estado=true
-    }
-    this.items.forEach(dta=>{
-      if(label == dta.label){
-        estado=false;
-        cont=1;
-      }
-      if(cont == 0){
-        estado= true
-      }
-    })
-    console.log(estado)
-    return estado
-  }
+ 
  
 }
 

@@ -10,9 +10,19 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   @ViewChild('miFormulario')formulario!:NgForm
-  constructor(public login:LoginService, private route: Router) { }
+  constructor(public login:LoginService, private route: Router) {
+    this.usuarioExistente()
+   }
 
   ngOnInit(): void {
+  }
+  usuarioExistente(){
+    const info = localStorage.getItem('data');
+    if(info == null){
+      return
+    }else{
+      this.route.navigate(['./superadmin']);
+    }
   }
   validarusuario(){
     if(this.formulario?.controls['usuario'].value.includes('@')){

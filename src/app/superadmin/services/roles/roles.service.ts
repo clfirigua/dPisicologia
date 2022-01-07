@@ -83,40 +83,5 @@ export class RolesService {
   }
 ];
 
-  formatoRoles(){
-    return [
-      {
-        label:'Panel',
-        estado:"off"
-      },
-      {
-        label:'Usuarios',
-        estado:"off"
-      },
-      {
-        label:'Cuentas',
-        estado:"off"
-      },
-      {
-        label:'Roles',
-        estado:"off"
-      },
-      {
-        label:'Papelera',
-        estado:"off"
-      },
-      {
-        label:'Formularios',
-        estado:"off"
-      },
-      {
-        label:'Informes',
-        estado:"off"
-      }
-    ]
-  }
-  getMenu(index:number){
-    // console.log(this.items[index])
-    return this.items[index]
-  }
+  
 }
