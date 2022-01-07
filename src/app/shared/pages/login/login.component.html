@@ -1,6 +1,27 @@
-<h1>Login</h1>
+<!-- <h1>Login</h1>
 <form (ngSubmit)="validarusuario()" #miFormulario="ngForm" autocomplete="off">
     <input ngModel name="usuario" type="text" required>
     <input ngModel name="password" type="text" required>
     <button [disabled]="validarenvio()">Enviar</button>
-</form>
+</form> -->
+
+<section class="page-login" id=login>
+    <div class="row-img">
+        <img src="assets/login.svg" alt="imagen de check" class="img-login">
+    </div>
+    <div class="row-login">
+        <form class="form-login" (ngSubmit)="validarusuario()" #miFormulario="ngForm" autocomplete="off">
+            <h1 class="text-login">Login</h1>
+            <div class="container-form">
+                <i class="far fa-envelope"></i>
+                <input  class="input-login" ngModel name="usuario" type="text" placeholder="E-mail" required>
+            </div>
+            <div class="container-form">
+                <i class="fas fa-key"></i>
+                <input type="password" class="input-login" ngModel name="password" placeholder="Contraseña" required>
+            </div>
+            <p class="text-login">forgot password?</p>
+            <button [disabled]="validarenvio()" class="sign-in">sign in</button>
+        </form>
+    </div>
+</section>

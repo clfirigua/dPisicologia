@@ -1,6 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+@import './normalize.css';
+:root{
+    --primario : #2196f3;
+    --secundario: #0075A0;
+    --medio: #0075A0;
+    --darksecundario: #00425F;
+    --darkprimario: #001B2B;
+    --blanco:#ffffff;
+}
 html,body{
-    margin: 10px;
+    
     background-color: var(--surface-b);
     font-family: var(--font-family);
 
@@ -17,3 +26,11 @@ html,body{
  body{
      color:white
  }
+
+ .espacio{
+    width: 100%;
+    height: 40px;
+}
+.p-dropdown{
+    width:100% !important;
+}
