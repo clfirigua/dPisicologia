@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,7 @@
     <title>psicologia</title>
     <link rel="stylesheet" href="../../assets/style.css">
 </head>
+
 <body>
     <!-- barra de navegacion -->
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
@@ -17,7 +19,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 menu justify-content-center">
+                <ul class="navbar-nav m-auto mb-2 mb-lg-0  justify-content-center">
                     <li class="nav-item m-3 text-capitalize">
                         <a class="nav-link active " aria-current="page" href="../usuarios/usuarios.html">Usuarios</a>
                     </li>
@@ -42,10 +44,39 @@
     </nav>
     <!-- fin barra navegacion  -->
 
+    <!-- usuarios -->
     <div class="container">
-        <div class="row">
-          <div class="col mt-5 d"></div>
-            <div class="col-3  mt-5 f"></div>
+        <!-- botones -->
+        <div class="d-flex bd-highlight mb-3">
+            <button type="button" class="btn btn-outline-primary btn-lg text-capitalize mt-5 me-3 p-2 bd-highlight">administradores</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg mt-5 p-2 bd-highlight">usuarios</button>
+            <button type="button" class="btn btn-outline-success btn-lg mt-5 ms-auto p-2 bd-highlight">agregar</button>
+        </div>
+        <div class="container">
+            <table class="table d">
+                <thead>
+                  <tr>
+                    <th scope="col" class="text-center">Nombre</th>
+                    <th scope="col" class="text-center">Apellido</th>
+                    <th scope="col" class="text-center">Rol</th>
+                    <th scope="col" class="text-center">Cedula</th>
+                    <th scope="col" class="text-center">Telefono</th>
+                    <th scope="col">Editar</th>
+                    <th scope="col">Eliminar</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td scope="row" class="text-center">Daniel</td>
+                    <td scope="row" class="text-center">Acero</td>
+                    <td scope="row" class="text-center">Administrador</td>
+                    <td scope="row" class="text-center">1001280760</td>
+                    <td scope="row" class="text-center">3124656896</td>
+                    <td scope="row" ><button class="btn btn-warning btn-lg">Editar</button></td>
+                    <td scope="row" ><button class="btn btn-danger btn-lg">Eliminar</button></td>
+                  </tr>
+                </tbody>
+              </table>
         </div>
     </div>
 
@@ -54,4 +85,5 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 </body>
+
 </html>
