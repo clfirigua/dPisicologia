@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>psicologia</title>
+    <link rel="stylesheet" href="../../assets/style.css">
+</head>
+
+<body>
+    <!-- barra de navegacion -->
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold fs-3 ms-5" href="../panel/panel.html">PSICOLOGIA</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+                aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarScroll">
+                <ul class="navbar-nav m-auto mb-2 mb-lg-0  justify-content-center">
+                    <li class="nav-item m-3 text-capitalize">
+                        <a class="nav-link " aria-current="page" href="../usuarios/usuarios.html">Usuarios</a>
+                    </li>
+                    <li class="nav-item text-capitalize m-3">
+                        <a class="nav-link active" href="../formularios/formularios.html">formulario</a>
+                    </li>
+                    <li class="nav-item text-capitalize m-3">
+                        <a class="nav-link " href="../roles/roles.html">roles</a>
+                    </li>
+                    <li class="nav-item text-capitalize  m-3">
+                        <a class="nav-link " href="../asignaciones/asignaciones.html">asignaciones</a>
+                    </li>
+                    <li class="nav-item text-capitalize  m-3">
+                        <a class="nav-link " href="../informes/informes.html">informes</a>
+                    </li>
+                    <li class="nav-item text-capitalize  m-3">
+                        <a class="nav-link " href="../copiaSeguridad/copiaSeguridad.html">respaldo</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- fin barra navegacion  -->
+    <div class="container">
+        <div class="d-grid gap-2 mt-3 mb-3 ">
+            <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">agregar
+                pregunta</button>
+        </div>
+    </div>
+    <div class="container tarjeta-sombra">
+
+        <p class="ms-3 text-capitalize">pregunta del formulario</p>
+        <p class="ms-3 text-capitalize">tipo de respuesta</p>
+        <!-- si la respesta es pregunta abierta, unica respuesta, multiple respuesta-->
+        <p class="ms-3 text-capitalize">si la pregunta depende de alguna</p>
+        <!--Debe decir de que pregunta depende y si depende cual respuesta depende -->
+        <p class="ms-3 text-capitalize">repuesta depende</p>
+        <div id="opciones">
+            <p class="ms-3 tezt-capitalize">opcion 1</p>
+            <p class="ms-3 tezt-capitalize">opcion 2</p>
+        </div>
+        <div class="d-grid gap-2 mx-auto ">
+            <button class="btn btn-warning" type="button" data-bs-toggle="modal"
+                data-bs-target="#exampleModal">editar</button>
+            <button class="btn btn-danger mb-2" type="button">eliminar</button>
+        </div>
+    </div>
+    <!-- fin formulario -->
+    <!-- modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Agregar Pregunta</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Pregunta</label>
+                            <input type="text" class="form-control" id="recipient-name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Tipos de respuesta</label>
+                            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                <option selected>Selecciona</option>
+                                <option value="1">Respuesta corta</option>
+                                <option value="2">Respuesta larga</option>
+                                <option value="3">Opcion multiple</option>
+                                <option value="4">Opcion unica</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">¿la pregunta depende de alguna respuesta
+                                anterior?</label>
+                            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                <option selected>Selecciona</option>
+                                <option value="1">Si</option>
+                                <option value="2">No</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">pregunta dependiente </label>
+                            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                <option selected>Selecciona la pregunta</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">...</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">respuesta dependiente </label>
+                            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                <option selected>Selecciona la respuesta</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">...</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" name="respuesta-corta" id="respuesta-corta" placeholder="Respuesta corta">
+                        </div>
+                        <div class="mb-3">
+                            <textarea name="" id="" cols="50" rows="5" placeholder="Respuesta larga"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="respuesta-larga" class="col-form-label">Opcion multiple</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    respuesta 1
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                                <label class="form-check-label" for="flexCheckChecked">
+                                    respuesta 2
+                                </label>
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    respuesta 3
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                                <label class="form-check-label" for="flexCheckChecked">
+                                    respuesta 4
+                                </label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="respuesta-larga" class="col-form-label">Opcion unica</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" >
+                                <label class="form-check-label" for="flexRadioDisabled">
+                                  respuesta 1
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioCheckedDisabled" checked >
+                                <label class="form-check-label" for="flexRadioCheckedDisabled">
+                                  respuesta 2
+                                </label>
+                              </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- fin modal -->
+    <script src="https://kit.fontawesome.com/2016ace7a6.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
