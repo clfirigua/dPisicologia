@@ -38,29 +38,75 @@
                     <li class="nav-item text-capitalize  m-3">
                         <a class="nav-link " href="../copiaSeguridad/copiaSeguridad.html">respaldo</a>
                     </li>
+                    <li class="nav-item dropdown m-3">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Nombre usuario
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Cerrar sesion</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
     <!--   roles   -->
-    <div class="container">
+    <div class="container mt-3">
         <div class="row">
             <div class="col-5" id="tarjetas-roles">
                 <div class=" row tarjeta-sombra">
-                    <div class="col-6 text-center fw-bold"> 
-                        <span class="align-middle" id="texto-tarjeta"> Nombre Rol</span>
+                    <div class="col-8 text-center fw-bold">
+                        <p> Nombre Rol</p>
                     </div>
-                    <div class="col-3">
+                    <div class="col-2">
                         <button class="btn btn-warning"><i class="fas fa-edit" aria-hidden="true"></i></button>
                     </div>
-                    <div class="col-3">
+                    <div class="col-2">
                         <button class="btn btn-danger"><i class="fas fa-trash-alt" aria-hidden="true"></i></button>
                     </div>
                 </div>
             </div>
             <div class="col-7">
                 <div class="tarjeta-sombra">
-
+                    <div class="container">
+                        <input type="text" class="inp-bottom-line-lg" placeholder="Nombre del rol">
+                        <div class="group-check mt-5">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch"
+                                    id="flexSwitchCheckDefault">
+                                <label class="form-check-labeitch chl" for="flexSwitchCheckDefault">Usuarios</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch"
+                                    id="flexSwitchCheckDefault">
+                                <label class="form-check-labeitch chl" for="flexSwitchCheckDefault">Formularios</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch"
+                                    id="flexSwitchCheckDefault">
+                                <label class="form-check-labeitch chl" for="flexSwitchCheckDefault">Asignaciones</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch"
+                                    id="flexSwitchCheckDefault">
+                                <label class="form-check-labeitch chl" for="flexSwitchCheckDefault">Informes</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch"
+                                    id="flexSwitchCheckDefault">
+                                <label class="form-check-labeitch chl" for="flexSwitchCheckDefault">Respaldo</label>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch"
+                                    id="flexSwitchCheckDefault">
+                                <label class="form-check-labeitch chl" for="flexSwitchCheckDefault">Panel</label>
+                            </div>
+                            <div class="d-grid gap-2 mt-5">
+                                <button class="btn btn-success" type="button">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

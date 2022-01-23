@@ -18,6 +18,17 @@ body{
     /* font-size: 16px; */
     font-family: 'Krub', sans-serif;
 }
+/*botones*/
+.btn-primary{
+    background-color: #00425F;
+    color: #ffffff;
+}
+.btn-primary:hover{
+    background-color: #001B2B;
+}
+.btn-primary:focus{
+    background-color: #001B2B;
+}
 
 .page-login{
     display:flex;
@@ -109,7 +120,68 @@ input:focus{
 }
 /*roles*/
 
-#texto-tarjeta {
-    height: 100%;
-    margin:auto;
+.inp-bottom-line-lg{
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #1890ff;
+    padding: 5px 10px;
+    outline: none;
+}
+.inp-bottom-line{
+    border: none;
+    border-bottom: 1px solid #1890ff;
+    padding: 5px 10px;
+    outline: none;
+}
+[placeholder]:focus::-webkit-input-placeholder {
+    transition: text-indent 1s 0.1s ease; 
+    text-indent: -100%;
+    opacity: 1;
+ }
+ th.tbutton{
+    width: 100px;
+ }
+ /*asignaciones*/
+ .container-assignment{
+    width: 100%;
+    margin: 1rem;
+    display: flex;
+    justify-content: space-evenly;
+ }
+ .box{
+     height: 15rem;
+     width: 42%;
+     border:1px solid #dfdfdf;
+     border-radius: 0.30rem;
+     overflow-y: scroll;
+     scroll-behavior: smooth
+ }
+ .list-buttons{
+    display: flex;
+    width: 5%;
+    flex-direction: column;
+    justify-content: space-evenly;
+ }
+ .box .list-group .list-group-item{
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+ }
+/*informes*/
+.visor-pdf{
+    width: 100%;
+    height: 85vh;
+}
+
+i.fa-file-upload{
+    display:flex;
+    justify-content: center;
+    color: gray;
+    font-size: 7rem;
+}
+p.tsubir{
+    text-align: center;
+    margin: 1rem;
+    color: gray;
+    
 }
