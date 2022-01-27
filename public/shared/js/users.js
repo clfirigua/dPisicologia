@@ -1,8 +1,10 @@
-import { addUser, viewUser, } from "./crudFirebase.js";
+import { addUser, validarUser, viewUser,deleteUser, updateUser } from "./crudFirebase.js";
 
 
 /*Declaraciones */
-const usersTable = document.getElementById("users-table")
+const usersTable = document.getElementById("users-table");
+// const btnDelete = document.querySelectorAll(".delete-user");
+// const btnUpdate = document.querySelectorAll(".update-user");
 const name = document.getElementById("name");
 const lastName = document.getElementById("lastName");
 const identification = document.getElementById("identification");
@@ -22,3 +24,5 @@ btn.addEventListener("click", (e) => {
 })
 
 viewUser(usersTable)
+
+    

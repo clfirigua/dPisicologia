@@ -1,4 +1,4 @@
-import { firebaseConfig, app, analytics, auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, db, collection, getDocs, addDoc, doc, setDoc, onSnapshot } from "./firebase.js";
+import { firebaseConfig, app, analytics, auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, db, collection, getDoc, addDoc, doc, setDoc, onSnapshot, deleteDoc } from "./firebase.js";
 
 
 const addUser = (name, lastName, identification, phone, email, password, address, rh, genderOption) => {
@@ -17,6 +17,7 @@ const addUser = (name, lastName, identification, phone, email, password, address
       // ..
     });
 }
+
 const createUser = async (name, lastName, identification, phone, email, password, address, rh, genderOption) => {
   try {
     const docRef = await addDoc(collection(db, "Usuarios"), {
@@ -55,20 +56,36 @@ const viewUser = async (userTable) => {
     <td scope="row" class="text-center">${data.correo}</td>
     <td scope="row" class="text-center">${data.identificacion}</td>
     <td scope="row" class="text-center">${data.telefono}</td>
-    <td scope="row"><button class="btn btn-warning " data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="getbootstrap">Editar</button></td>
-    <td scope="row"><button class="btn btn-danger ">Eliminar</button></td>
+    <td scope="row"><button class="btn btn-warning update-user" data-id=${doc.id} data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="getbootstrap">Editar</button></td>
+    <td scope="row"><button class="btn btn-danger delete-user" data-id=${doc.id}>Eliminar</button></td>
     </tr> 
     `
     });
 
-    userTable.innerHTML = html
+    userTable.innerHTML = html;
+    const btnDeleteTable = userTable.querySelectorAll('.delete-user');
+    const btnUpdateTable = userTable.querySelectorAll('.update-user');
+
+    deleteUser(btnDeleteTable);
+    updateUser(btnUpdateTable);
   })
 }
 
-const updateUser = () => {
-
+const updateUser = (btnUpdate) => {
+  btnUpdate.forEach((btn) => {
+    btn.addEventListener('click',async (e)  => {
+      const docu = await getDoc(doc(db, 'Usuarios', e.target.dataset.id));
+      console.log(docu)
+    })
+  })
 }
-const deleteUSer = () => {
+
+const deleteUser = (btnDelete) => {
+  btnDelete.forEach(btn => {
+    btn.addEventListener('click', ({ target: { dataset } }) => {
+      deleteDoc(doc(db, 'Usuarios', dataset.id));
+    })
+  })
 
 }
 
@@ -90,4 +107,4 @@ const validarUser = (user, password) => {
 }
 
 
-export { addUser, validarUser, viewUser }
+export { addUser, validarUser, viewUser, deleteUser, updateUser }
