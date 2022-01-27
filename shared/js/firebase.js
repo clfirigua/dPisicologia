@@ -6,7 +6,7 @@ import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.4/firebase-
 
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.4/firebase-auth.js"
 
-import { getFirestore,collection, addDoc,doc, setDoc } from "https://www.gstatic.com/firebasejs/9.6.4/firebase-firestore.js";
+import { getFirestore,collection, addDoc,doc, setDoc, getDocs, onSnapshot } from "https://www.gstatic.com/firebasejs/9.6.4/firebase-firestore.js";
 
 // TODO: Add SDKs for Firebase products that you want to use
 
@@ -46,6 +46,6 @@ const auth = getAuth();
 
 const db = getFirestore();
 
-export {db, collection, addDoc,doc, setDoc }
+export {db, collection, addDoc,doc, setDoc, getDocs, onSnapshot }
 export{auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged}
 export{firebaseConfig, app, analytics}
