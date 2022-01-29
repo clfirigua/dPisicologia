@@ -61,7 +61,7 @@
             <button type="button"
                 class="btn btn-outline-primary  text-capitalize mt-5 me-3 p-2 bd-highlight">administradores</button>
             <button type="button" class="btn btn-outline-secondary  mt-5 p-2 bd-highlight">usuarios</button>
-            <button type="button" class="btn btn-outline-success  mt-5 ms-auto p-2 bd-highlight" data-bs-toggle="modal"
+            <button type="button" class="btn btn-outline-success  mt-5 ms-auto p-2 bd-highlight" id="modal-add" data-bs-toggle="modal"
                 data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">agregar</button>
         </div>
         <div class="container table-responsive">
@@ -93,21 +93,21 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="form-user">
+                    <form id="user-form">
                         <div class="row g-3">
                             <div class="col-6 mb-3">
                                 <label for="recipient-name" class="col-form-label">Nombre</label>
-                                <input type="text" class="form-control" id="name">
+                                <input type="text" class="form-control" id="name" required>
                             </div>
                             <div class=" col-6 mb-3">
                                 <label for="recipient-name" class="col-form-label">Apellidos</label>
-                                <input type="text" class="form-control" id="lastName">
+                                <input type="text" class="form-control" id="lastName" required>
                             </div>
                         </div>
                         <div class="row g-3">
                             <div class=" col-6 mb-3">
                                 <label for="recipient-name" class="col-form-label">Identificacion</label>
-                                <input type="number" class="form-control" id="identification">
+                                <input type="number" class="form-control" id="identification" required>
                             </div>
                             <div class="col-6 mb-3">
                                 <label for="recipient-name" class="col-form-label">Telefono</label>
@@ -117,32 +117,52 @@
                         <div class="row g-3">
                             <div class="col-6 mb-3">
                                 <label for="recipient-name" class="col-form-label">Correo</label>
-                                <input type="email" class="form-control" id="email">
+                                <input type="email" class="form-control" id="email" required>
                             </div>
                             <div class="col-6 mb-3">
                                 <label for="recipient-name" class="col-form-label">Direccion</label>
-                                <input type="text" class="form-control" id="address">
+                                <input type="text" class="form-control" id="address" required>
                             </div>
                         </div>
                         <div class="row g-3">
                             <div class=" col-6 mb-3">
                                 <label for="recipient-name" class="col-form-label">Rh</label>
-                                <input type="text" class="form-control" id="rh">
+                                <select id="rh"class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option value="" disabled selected>Selecciona</option>
+                                    <option value="o+">o+</option>
+                                    <option value="o-">o-</option>
+                                    <option value="a+">a+</option>
+                                    <option value="a-">a-</option>
+                                    <option value="b+">b+</option>
+                                    <option value="b-">b-</option>
+                                    <option value="ab+">ab+</option>
+                                    <option value="ab-">ab-</option>
+
+                                </select>
                             </div>
                             <div class="col-6 mb-3">
                                 <label for="recipient-name" class="col-form-label">Genero</label>
                                 <select id="gender"class="form-select form-select-sm" aria-label=".form-select-sm example">
                                     <option value="" disabled selected>Selecciona</option>
-                                    <option value="1">Hombre</option>
-                                    <option value="2">Mujer</option>
+                                    <option value="M">Masculino</option>
+                                    <option value="F">Femenino</option>
                                 </select>
                             </div>
+                        </div>
+                        <div class="row g-3">
+                            <label for="recipient-name" class="col-form-label">rol</label>
+                                <select id="rol"class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option value="" disabled selected>Selecciona</option>
+                                    <option value="Usuario">Usuario</option>
+                                    <option value="admin">Administrador</option>
+                                    <option value="superadmin">Super administrador</option>
+                                </select>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary" id="btn-add-user">Guardar</button>
+                    <button  class="btn btn-primary" id="btn-add-user" type="submit">Guardar</button>
                 </div>
             </div>
         </div>

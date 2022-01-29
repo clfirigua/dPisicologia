@@ -6,7 +6,7 @@ import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.4/firebase-
 
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.4/firebase-auth.js"
 
-import { getFirestore,collection, addDoc,doc, setDoc, getDoc, onSnapshot ,deleteDoc} from "https://www.gstatic.com/firebasejs/9.6.4/firebase-firestore.js";
+import { getFirestore, collection, getDocs, onSnapshot, addDoc, deleteDoc, doc, getDoc,updateDoc,} from "https://www.gstatic.com/firebasejs/9.6.4/firebase-firestore.js";
 
 // TODO: Add SDKs for Firebase products that you want to use
 
@@ -46,6 +46,32 @@ const auth = getAuth();
 
 const db = getFirestore();
 
-export {db, collection, addDoc,doc, setDoc, getDoc, onSnapshot,deleteDoc }
-export{auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged}
-export{firebaseConfig, app, analytics}
+/*
+ * Save a New Task in Firestore
+ * @param {string} name the name of the user
+ * @param {string} lastName the lastname of the user
+ * @param {string} identification the identification of the user
+ * @param {string} phone the phone of the user 
+ * @param {string} email the email of the user
+ * @param {string} address the address of the user
+ * @param {string} rh the rh of the user
+ * @param {string} gender the gender of the user
+ * @param {string} rol the rol of the user
+ */
+export const addUser = (name, lastName, identificacion,phone, email, address, rh, gender, rol ) =>
+  addDoc(collection(db, "Usuarios"), { nombre:name, apellido:lastName, identificacion:identificacion,telefono:phone, correo:email, direccion:address, rh:rh, genero:gender, rol });
+
+export const onGetUsers = (callback) =>
+  onSnapshot(collection(db, "Usuarios"), callback);
+
+/**
+ *
+ * @param {string} id Task ID
+ */
+export const deleteUser = (id) => deleteDoc(doc(db, "Usuarios", id));
+
+export const getUser = (id) => getDoc(doc(db, "Usuarios", id));
+
+export const updateUser = (id, newFields) =>
+  updateDoc(doc(db, "Usuarios", id), newFields);
+

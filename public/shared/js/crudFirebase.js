@@ -1,7 +1,8 @@
-import { firebaseConfig, app, analytics, auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, db, collection, getDoc, addDoc, doc, setDoc, onSnapshot, deleteDoc } from "./firebase.js";
+import { firebaseConfig, app, analytics, auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, db, collection, getDoc, addDoc, doc, setDoc, onSnapshot, deleteDoc,updateDoc } from "./firebase.js";
 
 
 const addUser = (name, lastName, identification, phone, email, password, address, rh, genderOption) => {
+
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
@@ -16,6 +17,7 @@ const addUser = (name, lastName, identification, phone, email, password, address
       alert(errorCode)
       // ..
     });
+  
 }
 
 const createUser = async (name, lastName, identification, phone, email, password, address, rh, genderOption) => {
@@ -39,7 +41,8 @@ const createUser = async (name, lastName, identification, phone, email, password
 
 }
 
-const viewUser = async (userTable) => {
+const viewUser = async (userTable,userForm) => {
+
   onSnapshot(collection(db, "Usuarios"), (querySnapshot) => {
     let html = ''
     querySnapshot.forEach((doc) => {
@@ -67,20 +70,45 @@ const viewUser = async (userTable) => {
     const btnUpdateTable = userTable.querySelectorAll('.update-user');
 
     deleteUser(btnDeleteTable);
-    updateUser(btnUpdateTable);
+    updateUser(btnUpdateTable,userForm);
+
   })
 }
 
-const updateUser = (btnUpdate) => {
+const updateUser = (btnUpdate,userForm) => {  
+  
   btnUpdate.forEach((btn) => {
-    btn.addEventListener('click',async (e)  => {
-      const docu = await getDoc(doc(db, 'Usuarios', e.target.dataset.id));
-      console.log(docu)
+    btn.addEventListener('click',async (e)  => {     
+      const ref = doc(db, 'Usuarios', e.target.dataset.id)
+      const document = await getDoc(ref);
+      const user = document.data();
+      userForm['name'].value = user.nombre;
+      userForm['lastName'].value = user.apellido;
+      userForm['identification'].value = user.identificacion;
+      userForm['phone'].value = user.telefono;
+      userForm['email'].value = user.correo;
+      userForm['address'].value = user.direccion;
+      userForm['rh'].value = user.rh;
+      userForm['gender'].value = user.genero;
+
+      await updateDoc(ref,{
+        nombre: userForm['name'].value,
+        apellido: userForm['lastName'].value,
+        identificacion: userForm['identification'].value,
+        telefono: userForm['phone'].value,
+        correo: userForm['email'].value,
+        direccion: userForm['address'].value,
+        rh: userForm['rh'].value,
+        genero: userForm['gender'].value
+      });
+    
     })
   })
+
 }
 
 const deleteUser = (btnDelete) => {
+
   btnDelete.forEach(btn => {
     btn.addEventListener('click', ({ target: { dataset } }) => {
       deleteDoc(doc(db, 'Usuarios', dataset.id));
