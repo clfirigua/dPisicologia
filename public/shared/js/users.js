@@ -4,9 +4,9 @@ import { onGetUsers, addUser, deleteUser, getUser, updateUser, } from "./firebas
 /*Declaraciones */
 const userForm = document.getElementById("user-form");
 const usersTable = document.getElementById("users-table");
-const modalAdd = document.getElementById("modal-add");
 const name = document.getElementById("name");
 const lastName = document.getElementById("lastName");
+const typeId= document.getElementById('type-id')
 const identification = document.getElementById("identification");
 const phone = document.getElementById("phone");
 const email = document.getElementById("email");
@@ -16,26 +16,19 @@ const gender = document.getElementById("gender");
 const rol = document.getElementById("rol")
 const btnAddUser = document.getElementById("btn-add-user");
 
-const password = "123456";
 
 let editStatus = false;
 let id = "";
 
 
 window.addEventListener("DOMContentLoaded", async (e) => {
-    // const querySnapshot = await getTasks();
-    // querySnapshot.forEach((doc) => {
-    //   console.log(doc.data());
-    // });
+
 
     onGetUsers((querySnapshot) => {
         usersTable.innerHTML = "";
 
         querySnapshot.forEach((doc) => {
-            // doc.data() is never undefined for query doc snapshots
 
-
-            // console.log(document.querySelector(userTable))
             const data = doc.data();
 
             usersTable.innerHTML += `
@@ -72,6 +65,7 @@ window.addEventListener("DOMContentLoaded", async (e) => {
                     const user = doc.data();
                     userForm['name'].value = user.nombre;
                     userForm['lastName'].value = user.apellido;
+                    userForm['type-id'].value = user.tipo_id
                     userForm['identification'].value = user.identificacion;
                     userForm['phone'].value = user.telefono;
                     userForm['email'].value = user.correo;
@@ -96,11 +90,12 @@ btnAddUser.addEventListener("click", async (e) => {
 
     try {
         if (!editStatus) {
-            await addUser(name.value, lastName.value, identification.value, phone.value, email.value, address.value, rh.value, gender.value, rol.value);
+            await addUser(name.value, lastName.value, typeId.value, identification.value, phone.value, email.value, address.value, rh.value, gender.value, rol.value, false);
         } else {
             await updateUser(id, {
                 nombre: name.value,
                 apellido: lastName.value,
+                tipo_id: typeId.value,
                 identificacion: identification.value,
                 telefono: phone.value,
                 correo: email.value,
@@ -121,29 +116,3 @@ btnAddUser.addEventListener("click", async (e) => {
         console.log(error);
     }
 });
-
-/* antes*/
-
-/*
-var agregar = false
-if (agregar) {
-    modalAdd.addEventListener("click", (e) => {
-        agregar = true
-        btnAddUser.addEventListener("click", (e) => {
-
-            addUser(name.value, lastName.value, identification.value, phone.value, email.value, password, address.value, rh.value, gender.value)
-            document.querySelector("form").reset();
-            agregar = false
-        })
-    })
-} else {
-    updateUser()
-}
-
-
-
-
-
-viewUser(usersTable, userForm)
-
-*/

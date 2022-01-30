@@ -46,32 +46,23 @@ const auth = getAuth();
 
 const db = getFirestore();
 
-/*
- * Save a New Task in Firestore
- * @param {string} name the name of the user
- * @param {string} lastName the lastname of the user
- * @param {string} identification the identification of the user
- * @param {string} phone the phone of the user 
- * @param {string} email the email of the user
- * @param {string} address the address of the user
- * @param {string} rh the rh of the user
- * @param {string} gender the gender of the user
- * @param {string} rol the rol of the user
- */
-export const addUser = (name, lastName, identificacion,phone, email, address, rh, gender, rol ) =>
-  addDoc(collection(db, "Usuarios"), { nombre:name, apellido:lastName, identificacion:identificacion,telefono:phone, correo:email, direccion:address, rh:rh, genero:gender, rol });
+//funciones  de usuarios "./users.js"
 
-export const onGetUsers = (callback) =>
-  onSnapshot(collection(db, "Usuarios"), callback);
+/*añadir usuarios */
+export const addUser = (name, lastName,typeId, identification,phone, email, address, rh, gender, rol, state) =>
+  addDoc(collection(db, "Usuarios"), { nombre:name, apellido:lastName,tipo_id:typeId, identificacion:identification,telefono:phone, correo:email, direccion:address, rh:rh, genero:gender, rol:rol, estado:state });
 
-/**
- *
- * @param {string} id Task ID
- */
+/*mostrar en tiempo real usuarios */
+export const onGetUsers = (callback) => onSnapshot(collection(db, "Usuarios"), callback);
+
+/*borrar usuarios */
 export const deleteUser = (id) => deleteDoc(doc(db, "Usuarios", id));
 
+/*obtener informacion del usuario */
 export const getUser = (id) => getDoc(doc(db, "Usuarios", id));
 
-export const updateUser = (id, newFields) =>
-  updateDoc(doc(db, "Usuarios", id), newFields);
+/*actualizar usuario */
+export const updateUser = (id, newFields) => updateDoc(doc(db, "Usuarios", id), newFields);
+
+//fin funciones usuarios
 
