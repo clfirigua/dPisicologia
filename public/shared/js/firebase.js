@@ -6,7 +6,7 @@ import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.4/firebase-
 
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.4/firebase-auth.js"
 
-import { getFirestore, collection, getDocs, onSnapshot, addDoc, deleteDoc, doc, getDoc,updateDoc,} from "https://www.gstatic.com/firebasejs/9.6.4/firebase-firestore.js";
+import { getFirestore, collection, getDocs, onSnapshot, addDoc, deleteDoc, doc, getDoc,updateDoc, setDoc} from "https://www.gstatic.com/firebasejs/9.6.4/firebase-firestore.js";
 
 // TODO: Add SDKs for Firebase products that you want to use
 
@@ -66,3 +66,4 @@ export const updateUser = (id, newFields) => updateDoc(doc(db, "Usuarios", id), 
 
 //fin funciones usuarios
 
+export {db, collection, addDoc, onSnapshot,deleteDoc,getDoc,updateDoc, doc,setDoc}

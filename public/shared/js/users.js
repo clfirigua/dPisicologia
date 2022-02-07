@@ -6,7 +6,7 @@ const userForm = document.getElementById("user-form");
 const usersTable = document.getElementById("users-table");
 const name = document.getElementById("name");
 const lastName = document.getElementById("lastName");
-const typeId= document.getElementById('type-id')
+const typeId = document.getElementById('type-id')
 const identification = document.getElementById("identification");
 const phone = document.getElementById("phone");
 const email = document.getElementById("email");
@@ -32,21 +32,21 @@ window.addEventListener("DOMContentLoaded", async (e) => {
             const data = doc.data();
 
             usersTable.innerHTML += `
-      <tr>
-      <td scope="row" class="text-center">${data.nombre}</td>
-      <td scope="row" class="text-center">${data.apellido}</td>
-      <td scope="row" class="text-center">${data.rol}</td>
-      <td scope="row" class="text-center">${data.identificacion}</td>
-      <td scope="row" class="text-center">${data.telefono}</td>
-      <td scope="row"><button class="btn btn-warning update-user" data-id=${doc.id} data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="getbootstrap">Editar</button></td>
-      <td scope="row"><button class="btn btn-danger delete-user" data-id=${doc.id}>Eliminar</button></td>
-      </tr> 
-      `
+                <tr>
+                <td scope="row" class="text-center">${data.nombre}</td>
+                <td scope="row" class="text-center">${data.apellido}</td>
+                <td scope="row" class="text-center">${data.rol}</td>
+                <td scope="row" class="text-center">${data.identificacion}</td>
+                <td scope="row" class="text-center">${data.telefono}</td>
+                <td scope="row"><button class="btn btn-warning update-user" data-id=${doc.id} data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="getbootstrap">Editar</button></td>
+                <td scope="row"><button class="btn btn-danger delete-user" data-id=${doc.id}>Eliminar</button></td>
+                </tr> 
+                `
         });
 
         const btnDeleteTable = document.querySelectorAll('.delete-user');
         const btnUpdateTable = document.querySelectorAll('.update-user');
-    
+
         btnDeleteTable.forEach((btn) =>
             btn.addEventListener("click", async ({ target: { dataset } }) => {
                 try {
@@ -76,7 +76,7 @@ window.addEventListener("DOMContentLoaded", async (e) => {
 
                     editStatus = true;
                     id = doc.id;
-                    btnAddUser.innerText = "Update";
+                    btnAddUser.innerText = "Actualizar";
                 } catch (error) {
                     console.log(error);
                 }
@@ -102,12 +102,12 @@ btnAddUser.addEventListener("click", async (e) => {
                 direccion: address.value,
                 rh: rh.value,
                 genero: gender.value,
-                rol:rol.value
+                rol: rol.value
             });
 
             editStatus = false;
             id = "";
-            btnAddUser.innerText = "Save";
+            btnAddUser.innerText = "Guardar";
         }
 
         userForm.reset();
