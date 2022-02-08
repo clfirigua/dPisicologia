@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>psicologia</title>
+    <link rel="icon" href="../../assets/psicologia.ico" type="image/x-icon">
     <link rel="stylesheet" href="../../assets/style.css">
 </head>
 
@@ -58,22 +59,25 @@
                 pregunta</button>
         </div>
     </div>
-    <div class="container tarjeta-sombra">
+    <div id="tarjetas-form">
+        <div class="container tarjeta-sombra">
+            <!-- targetas generadas -->
 
-        <p class="ms-3 text-capitalize">pregunta del formulario</p>
-        <p class="ms-3 text-capitalize">tipo de respuesta</p>
-        <!-- si la respesta es pregunta abierta, unica respuesta, multiple respuesta-->
-        <p class="ms-3 text-capitalize">si la pregunta depende de alguna</p>
-        <!--Debe decir de que pregunta depende y si depende cual respuesta depende -->
-        <p class="ms-3 text-capitalize">repuesta depende</p>
-        <div id="opciones">
-            <p class="ms-3 tezt-capitalize">opcion 1</p>
-            <p class="ms-3 tezt-capitalize">opcion 2</p>
-        </div>
-        <div class="d-grid gap-2 mx-auto ">
-            <button class="btn btn-warning" type="button" data-bs-toggle="modal"
-                data-bs-target="#exampleModal">editar</button>
-            <button class="btn btn-danger mb-2" type="button">eliminar</button>
+            <p class="ms-3 text-capitalize">pregunta del formulario</p>
+            <p class="ms-3 text-capitalize">tipo de respuesta</p>
+            <!-- si la respesta es pregunta abierta, unica respuesta, multiple respuesta-->
+            <p class="ms-3 text-capitalize">si la pregunta depende de alguna</p>
+            <!--Debe decir de que pregunta depende y si depende cual respuesta depende -->
+            <p class="ms-3 text-capitalize">repuesta depende</p>
+            <div id="opciones">
+                <p class="ms-3 tezt-capitalize">opcion 1</p>
+                <p class="ms-3 tezt-capitalize">opcion 2</p>
+            </div>
+            <div class="d-grid gap-2 mx-auto ">
+                <button class="btn btn-warning" type="button" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">editar</button>
+                <button class="btn btn-danger mb-2" type="button">eliminar</button>
+            </div>
         </div>
     </div>
     <!-- fin formulario -->
@@ -86,34 +90,37 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="form">
 
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Pregunta</label>
-                            <input type="text" class="form-control" id="recipient-name">
+                            <input type="text" class="form-control" id="pregunta">
                         </div>
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Tipos de respuesta</label>
-                            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                            <select class="form-select form-select-sm" aria-label=".form-select-sm example"
+                                id="tiporespuesta">
                                 <option selected>Selecciona</option>
-                                <option value="1">Respuesta corta</option>
-                                <option value="2">Respuesta larga</option>
-                                <option value="3">Opcion multiple</option>
-                                <option value="4">Opcion unica</option>
+                                <option value="Respuesta corta">Respuesta corta</option>
+                                <option value="Respuesta larga">Respuesta larga</option>
+                                <option value="Opcion multiple">Opcion multiple</option>
+                                <option value="Opcion unica">Opcion unica</option>
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">¿la pregunta depende de alguna respuesta
                                 anterior?</label>
-                            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                            <select class="form-select form-select-sm" aria-label=".form-select-sm example"
+                                id="preguntadepende">
                                 <option selected>Selecciona</option>
-                                <option value="1">Si</option>
-                                <option value="2">No</option>
+                                <option value="Si">Si</option>
+                                <option value="No">No</option>
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">pregunta dependiente </label>
-                            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                            <select class="form-select form-select-sm" aria-label=".form-select-sm example"
+                                id="preguntadependiente">
                                 <option selected>Selecciona la pregunta</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -123,7 +130,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">respuesta dependiente </label>
-                            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                            <select class="form-select form-select-sm" aria-label=".form-select-sm example"
+                                id="respuestadepende">
                                 <option selected>Selecciona la respuesta</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -131,52 +139,60 @@
                                 <option value="4">...</option>
                             </select>
                         </div>
-                        <div class="mb-3">
-                            <input type="text" name="respuesta-corta" id="respuesta-corta" class="inp-bottom-line" placeholder="Respuesta corta">
-                        </div>
-                        <div class="mb-3">
-                            <textarea name="" id="" cols="50" rows="5" placeholder="Respuesta larga"></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="respuesta-larga" class="col-form-label">Opcion multiple</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    respuesta 1
-                                </label>
+                            <div class="mb-3" id="respuestas">
+                                <button class="btn btn-success" id="agregarRespuesta" disabled> agregar respuesta </button>
+                                <!-- agregar respuestas -->
+                              
+                                <!-- <input type="text" name="respuesta-corta" id="respuesta-corta" class="inp-bottom-line"
+                                    placeholder="Respuesta corta"> -->
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                                <label class="form-check-label" for="flexCheckChecked">
-                                    respuesta 2
-                                </label>
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    respuesta 3
-                                </label>
+                            <!-- <div class="mb-3">
+                                <textarea name="" id="" cols="50" rows="5" placeholder="Respuesta larga"></textarea>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                                <label class="form-check-label" for="flexCheckChecked">
-                                    respuesta 4
-                                </label>
+                            <div class="mb-3">
+                                <label for="opcionmultiple" class="col-form-label">Opcion multiple</label>
+                                <div class="form-check"> 
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault" >
+                                        respuesta 1
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
+                                        checked>
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                        respuesta 2
+                                    </label>
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        respuesta 3
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
+                                        checked>
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                        respuesta 4
+                                    </label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="respuesta-larga" class="col-form-label">Opcion unica</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" >
-                                <label class="form-check-label" for="flexRadioDisabled">
-                                  respuesta 1
-                                </label>
-                              </div>
-                              <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioCheckedDisabled" checked >
-                                <label class="form-check-label" for="flexRadioCheckedDisabled">
-                                  respuesta 2
-                                </label>
-                              </div>
-                        </div>
+                            <div class="mb-3">
+                                <label for="respuesta-larga" class="col-form-label">Opcion unica</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDisabled"
+                                        id="flexRadioDisabled">
+                                    <label class="form-check-label" for="flexRadioDisabled">
+                                        respuesta 1
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDisabled"
+                                        id="flexRadioCheckedDisabled" checked>
+                                    <label class="form-check-label" for="flexRadioCheckedDisabled">
+                                        respuesta 2
+                                    </label>
+                                </div>
+                            </div> -->
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -191,6 +207,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
+    <script type="module" src="../js/form.js"></script>
+
 </body>
 
 </html>

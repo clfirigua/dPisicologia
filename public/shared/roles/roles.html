@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>psicologia</title>
+    <link rel="icon" href="../../assets/psicologia.ico" type="image/x-icon">
     <link rel="stylesheet" href="../../assets/style.css">
 </head>
 
@@ -55,58 +56,52 @@
     <div class="container mt-3">
         <div class="row">
             <div class="col-5" id="tarjetas-roles">
-                <div class=" row tarjeta-sombra">
-                    <div class="col-8 text-center fw-bold">
-                        <p> Nombre Rol</p>
-                    </div>
-                    <div class="col-2">
-                        <button class="btn btn-warning"><i class="fas fa-edit" aria-hidden="true"></i></button>
-                    </div>
-                    <div class="col-2">
-                        <button class="btn btn-danger"><i class="fas fa-trash-alt" aria-hidden="true"></i></button>
-                    </div>
-                </div>
+                <!-- insertar tarjetas de los roles roles.js-->
             </div>
             <div class="col-7">
                 <div class="tarjeta-sombra">
-                    <div class="container">
-                        <input type="text" class="inp-bottom-line-lg" placeholder="Nombre del rol">
-                        <div class="group-check mt-5">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch"
-                                    id="flexSwitchCheckDefault">
-                                <label class="form-check-labeitch chl" for="flexSwitchCheckDefault">Usuarios</label>
-                            </div>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch"
-                                    id="flexSwitchCheckDefault">
-                                <label class="form-check-labeitch chl" for="flexSwitchCheckDefault">Formularios</label>
-                            </div>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch"
-                                    id="flexSwitchCheckDefault">
-                                <label class="form-check-labeitch chl" for="flexSwitchCheckDefault">Asignaciones</label>
-                            </div>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch"
-                                    id="flexSwitchCheckDefault">
-                                <label class="form-check-labeitch chl" for="flexSwitchCheckDefault">Informes</label>
-                            </div>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch"
-                                    id="flexSwitchCheckDefault">
-                                <label class="form-check-labeitch chl" for="flexSwitchCheckDefault">Respaldo</label>
-                            </div>
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch"
-                                    id="flexSwitchCheckDefault">
-                                <label class="form-check-labeitch chl" for="flexSwitchCheckDefault">Panel</label>
-                            </div>
-                            <div class="d-grid gap-2 mt-5">
-                                <button class="btn btn-success" type="button">Guardar</button>
+                    <form id="rol-form">
+                        <div class="container">
+                            <input type="text" class="inp-bottom-line-lg" placeholder="Nombre del rol" id="nameRol">
+                            <div class="group-check mt-5">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="checkUsers">
+                                    <label class="form-check-labeitch chl" for="flexSwitchCheckDefault">Usuarios</label>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="checkForms">
+                                    <label class="form-check-labeitch chl"
+                                        for="flexSwitchCheckDefault">Formularios</label>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" role="switch"
+                                        id="checkAssignations">
+                                    <label class="form-check-labeitch chl"
+                                        for="flexSwitchCheckDefault">Asignaciones</label>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="checkReports">
+                                    <label class="form-check-labeitch chl" for="flexSwitchCheckDefault">Informes</label>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="checkBackups">
+                                    <label class="form-check-labeitch chl" for="flexSwitchCheckDefault">Respaldo</label>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="checkPanel">
+                                    <label class="form-check-labeitch chl" for="flexSwitchCheckDefault">Panel</label>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="checkanswers">
+                                    <label class="form-check-labeitch chl" for="flexSwitchCheckDefault">Responder
+                                        formulario</label>
+                                </div>
+                                <div class="d-grid gap-2 mt-5">
+                                    <button class="btn btn-success" type="button" id="saveRoles">Guardar</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -115,6 +110,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
+    <script type="module" src="../js/roles.js"></script>
 </body>
 
 </html>
