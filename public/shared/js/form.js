@@ -8,21 +8,51 @@ const respuestaDepende = document.getElementById("respuestadepende");
 const form = document.getElementById("form");
 const tarjetasForm = document.getElementById("tarjetas-form")
 const respuestas = document.getElementById("respuestas");
+const butttom = document.getElementById("guardarDatos");
+let cont = 0;
+let preguntas = [];
 
 let collection = "Formularios";
 
 
+const boton = (tipo) => {
+    respuestas.innerHTML += `<button class="btn btn-success" id="respuesta"> Respuesta </button>`;
+    const btn = document.getElementById('respuesta');
+    btn.addEventListener('click', (event) => {
+        event.preventDefault();
+        if (tipo) {
+            const multiple = document.getElementById('multiple');
+
+             multiple.innerHTML += `
+                <div class="form-check" id="${cont}" >
+                    <i class="far fa-check-square">
+                        <input type="text" class="inp-bottom-line" placeholder="opcion multiple">
+                        <button class="btn btn-danger data" data-id="${cont}">Eliminar</button>
+                    </i>
+                </div>
+           `
+           const btnDeleteTable = document.querySelectorAll('.data');
+           btnDeleteTable.forEach((btn) =>
+                   btn.addEventListener("click",  (e) => { 
+                       e.preventDefault()
+                        const {id} = e.target.dataset 
+                        const target = document.getElementById(id)
+                        multiple.removeChild(target);
+                        cont-1;
+                   })
+               );
+          cont++
+        } else {
+
+        }
+    })
+
+
+
+}
 
 tipoRespuesta.addEventListener("change", (e) => {
-    let tipo = e.target.value
-    
-    respuestas.innerHTML+=`<button class="btn btn-success" id="agregarRespuesta" onclick="nose()"> agregar respuesta </button>`
-    
-    
-    // agregarRespuesta.addEventListener("click", (e)=> {
-    //     e.preventDefault();
-    //     console.log("hola");
-    // })
+    let tipo = e.target.value;
 
     switch (tipo) {
         case "Respuesta corta":
@@ -34,21 +64,18 @@ tipoRespuesta.addEventListener("change", (e) => {
             </div> `;
             break;
         case "Respuesta larga":
-            respuestas.innerHTML +=`
+            respuestas.innerHTML += `
             <div class="mb-3">
                 <textarea name="" id="" rows="5" placeholder="Respuesta larga"></textarea>
             </div>`;
             break;
         case "Opcion multiple":
-            respuestas.innerHTML+=`
-            <div class="mb-3">
-            <label for="opcionmultiple" class="col-form-label">Opcion multiple</label>
-                <div class="form-check">
-                <i class="far fa-check-square">
-                        <input type="text" class="inp-bottom-line" placeholder="opcion multiple">
-                        </i>
-                </div>
+            respuestas.innerHTML += `
+            <div class="mb-3" id="multiple">
+                <label for="opcionmultiple" class="col-form-label">Opcion multiple</label>
+
             </div>`
+            boton(true);
             break;
         case "Opcion unica":
             respuestas.innerHTML += `
@@ -60,13 +87,28 @@ tipoRespuesta.addEventListener("change", (e) => {
                     </label>
                 </div>
             </div>`
+            boton(false);
             break;
         default:
-            respuestas.innerHTML+=`
+            respuestas.innerHTML += `
                 <p>Selecciona un tipo de respuesta</p>
             `
             break;
     }
+})
+
+butttom.addEventListener('click', (event)=>{
+    event.preventDefault();
+    for(let i=0; i< cont; i++){
+          const data = document.getElementById(i);
+            if(data?.children[0]?.children[0]?.value  != undefined){
+                const pregunta = data?.children[0]?.children[0]?.value
+                preguntas.push({pregunta})
+            }
+          
+          
+    }
+    console.log(preguntas)
 })
 
 
@@ -102,8 +144,5 @@ window.addEventListener("DOMContentLoaded", async (e) => {
             console.log(error);
         }
     }
-})
-function nose(){
-    // const agregarRespuesta = document.getElementById("agregarRespuesta");
-    console.log("hola")
-}
+});
+
