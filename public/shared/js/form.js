@@ -9,10 +9,9 @@ const form = document.getElementById("form");
 const tarjetasForm = document.getElementById("tarjetas-form")
 const respuestas = document.getElementById("respuestas");
 const butttom = document.getElementById("guardarDatos");
+const collection = "Formularios";
 let cont = 0;
-let preguntas = [];
-
-let collection = "Formularios";
+let contPreguntas = 0;
 
 
 
@@ -22,20 +21,36 @@ window.addEventListener("DOMContentLoaded", async (e) => {
     if (localStorage.getItem("estado") == "creando") {
         try {
             let id = localStorage.getItem("idAddForm")
-            const doc = await getDocument(collection, id)
-            const preguntas = doc.data();
+            const doc = await getDocument(collection, id);
             tarjetasForm.innerHTML = "";
-            /*await updateDocument(collection,id,{
-                pregunta:pregunta,
-                tipoRespuesta:tipoRespuesta,
-                preguntaDepende:preguntaDepende,
-                preguntaDependiente:preguntaDependiente,
-                respuestaDepende:respuestaDepende,
-                opcionesRespuestas:{
+            const dataForm = [doc.data()]
+            dataForm.forEach((target, index) =>{
+                const targetDataForm = target[index+1];
+                $('#tarjetas-form').append(
+                    `
+                    <div class="container tarjeta-sombra">
+                    <!-- targetas generadas -->
+        
+                    <p class="ms-3 text-capitalize">pregunta del formulario</p>
+                    <p class="ms-3 text-capitalize">tipo de respuesta</p>
+                    <!-- si la respesta es pregunta abierta, unica respuesta, multiple respuesta-->
+                    <p class="ms-3 text-capitalize">si la pregunta depende de alguna</p>
+                    <!--Debe decir de que pregunta depende y si depende cual respuesta depende -->
+                    <p class="ms-3 text-capitalize">repuesta depende</p>
+                    <div id="opciones">
+                        <p class="ms-3 tezt-capitalize">opcion 1</p>
+                        <p class="ms-3 tezt-capitalize">opcion 2</p>
+                    </div>
+                    <div class="d-grid gap-2 mx-auto ">
+                        <button class="btn btn-warning" type="button" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">editar</button>
+                        <button class="btn btn-danger mb-2" type="button">eliminar</button>
+                    </div>
+                    </div>
+                    `
+                )
+            })
 
-                }
-
-            })*/
         } catch (error) {
             console.log(error);
         }
@@ -59,13 +74,15 @@ const boton = (tipo) => {
         event.preventDefault();
         if (tipo == "Opcion multiple") {
             const multiple = document.getElementById('multiple');
-
-            multiple.innerHTML += `
+            $(multiple).append(
+                `
                 <div class="form-check opcion-respuesta" id="${cont}" >
-                    <input type="text" class="inp-bottom-line" placeholder="opcion multiple">
-                    <button class="btn btn-danger eliminar" data-id="${cont}">Eliminar</button>
+                <input type="text" class="inp-bottom-line" placeholder="opcion multiple">
+                <button class="btn btn-danger eliminar" data-id="${cont}">Eliminar</button>
                 </div>
-           `
+
+                `
+            )
             const btnDeleteTable = document.querySelectorAll('.eliminar');
             btnDeleteTable.forEach((btn) =>
                 btn.addEventListener("click", (e) => {
@@ -81,11 +98,14 @@ const boton = (tipo) => {
         } else {
             if (tipo == "Opcion unica") {
                 const unica = document.getElementById("unica");
-                unica.innerHTML += `
-                <div class="form-check opcion-respuesta" id="${cont}">
+                $(unica).append(
+                    `
+                    <div class="form-check opcion-respuesta" id="${cont}">
                     <input type="text" class="inp-bottom-line" placeholder="opcion unica">
                     <button class="btn btn-danger eliminar" data-id="${cont}">Eliminar</button>
-                </div>`
+                    </div>
+                    `
+                )
                 const btnDeleteTable = document.querySelectorAll('.eliminar');
                 btnDeleteTable.forEach((btn) =>
                     btn.addEventListener("click", (e) => {
@@ -147,25 +167,45 @@ tipoRespuesta.addEventListener("change", (e) => {
     }
 })
 
+
 butttom.addEventListener('click', async (e) => {
     e.preventDefault();
-    let id = localStorage.getItem("idAddForm")
-    let objetRespuestas
+    const id = localStorage.getItem("idAddForm")
+    const objetRespuestas = [];
+
     for (let i = 0; i < cont; i++) {
         const data = document.getElementById(i);
-        if (data?.children[0]?.value != undefined) {
-            objetRespuestas = [data?.children[0]?.value]
-            objetRespuestas.push(objetRespuestas)
+        const dataMin = data?.children[0]?.value;
+        if (dataMin != undefined) {
+            objetRespuestas.push(dataMin)
         }
     }
-    await updateDocument(collection, id, {
+    const preguntasFormulario = {};
+    preguntasFormulario[contPreguntas] =
+    {
         pregunta: pregunta.value,
         tipoRespuesta: tipoRespuesta.value,
         preguntaDepende: preguntaDepende.value,
         preguntaDependiente: preguntaDependiente.value,
         respuestaDepende: respuestaDepende.value,
-        respuestas: ["dads","das",2],
+        objetRespuestas
+    }
+    await updateDocument(collection, id, preguntasFormulario)
 
-    })
+
 })
+
+$('#agregarPregunta').click(function (e) {
+    e.preventDefault();
+    contPreguntas++
+});
+
+function contarLetras(letras) {
+    var objeto = {};
+    for (var i in letras) {
+        objeto[letras[i]] = (objeto[letras[i]] || 0) + 1;
+    }
+    return objeto;
+}
+
 

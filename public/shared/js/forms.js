@@ -1,6 +1,5 @@
 
-import { addDocument, onGetDocuments, deleteDocuments, getDocument} from "./crudFirebase.js";
-
+import { addDocument, onGetDocuments, deleteDocuments, getDocument, oneDoc} from "./crudFirebase.js";
 const addForm = document.getElementById("add-form");
 const nameForm = document.getElementById("name-form");
 const tableForm =  document.getElementById("forms-table");
@@ -9,10 +8,10 @@ let collection = "Formularios"
 
 addForm.addEventListener("click", async ()=>{
 
-   const document = await addDocument(collection,{
-        titulo:nameForm.value
+   const document = await oneDoc(collection,nameForm.value,{
+        
     })
-    localStorage.setItem("idAddForm",document._key.path.segments[1])
+    localStorage.setItem("idAddForm",nameForm.value)
     localStorage.setItem("estado","creando");
     location.href = "./formulario.html"
 })
@@ -24,7 +23,7 @@ window.addEventListener('DOMContentLoaded', async (e) => {
             const data = doc.data();
             tableForm.innerHTML+=`
             <tr>
-                <td scope="row" class="text-center">${data.titulo}</td>
+                <td scope="row" class="text-center">${doc.id}</td>
                 <td scope="row" class="text-center">${data.descripcion}</td>
                 <td scope="row"><button class="btn btn-warning update-form" data-id=${doc.id}>Editar</button></td>
                 <td scope="row"><button class="btn btn-danger delete-form" data-id=${doc.id}>Eliminar</button></td>
