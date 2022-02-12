@@ -24,22 +24,35 @@ window.addEventListener("DOMContentLoaded", async (e) => {
             const doc = await getDocument(collection, id);
             tarjetasForm.innerHTML = "";
             const dataForm = [doc.data()]
+
+            // for (let i = 0; i < 3; i++) {
+            //         console.log(doc.data()[i])
+            //     }
+
+
             dataForm.forEach((target, index) =>{
+                
                 const targetDataForm = target[index+1];
+                if((targetDataForm).preguntaDepende=="Si"){
+                    $('#dependencia').append(
+                        `
+                        <p class="ms-3 text-capitalize">${targetDataForm.preguntaDepende}</p>
+                        <p class="ms-3 text-capitalize">${targetDataForm.preguntaDependiente}</p>
+                        <p class="ms-3 text-capitalize">${targetDataForm.respuestaDepende}</p>
+                        `
+                    )
+                }
                 $('#tarjetas-form').append(
                     `
                     <div class="container tarjeta-sombra">
                     <!-- targetas generadas -->
         
-                    <p class="ms-3 text-capitalize">pregunta del formulario</p>
-                    <p class="ms-3 text-capitalize">tipo de respuesta</p>
-                    <!-- si la respesta es pregunta abierta, unica respuesta, multiple respuesta-->
-                    <p class="ms-3 text-capitalize">si la pregunta depende de alguna</p>
-                    <!--Debe decir de que pregunta depende y si depende cual respuesta depende -->
-                    <p class="ms-3 text-capitalize">repuesta depende</p>
+                    <p class="ms-3 text-capitalize">${targetDataForm.pregunta}</p>
+                    <p class="ms-3 text-capitalize">${targetDataForm.tipoRespuesta}</p>
+                    <div id="dependencia">
+                    
+                    </div>
                     <div id="opciones">
-                        <p class="ms-3 tezt-capitalize">opcion 1</p>
-                        <p class="ms-3 tezt-capitalize">opcion 2</p>
                     </div>
                     <div class="d-grid gap-2 mx-auto ">
                         <button class="btn btn-warning" type="button" data-bs-toggle="modal"
@@ -49,6 +62,13 @@ window.addEventListener("DOMContentLoaded", async (e) => {
                     </div>
                     `
                 )
+                targetDataForm.objetRespuestas.forEach(respuesta => {
+                    $('#opciones').append(`
+                    <p class="ms-3 tezt-capitalize">${respuesta}</p>
+                `)
+                });
+                
+                contPreguntas++
             })
 
         } catch (error) {
@@ -88,7 +108,6 @@ const boton = (tipo) => {
                 btn.addEventListener("click", (e) => {
                     e.preventDefault()
                     const { id } = e.target.dataset
-                    console.log(id)
                     const target = document.getElementById(id)
                     multiple.removeChild(target);
                     cont - 1;
@@ -198,6 +217,7 @@ butttom.addEventListener('click', async (e) => {
 $('#agregarPregunta').click(function (e) {
     e.preventDefault();
     contPreguntas++
+    console.log(contPreguntas)
 });
 
 function contarLetras(letras) {
