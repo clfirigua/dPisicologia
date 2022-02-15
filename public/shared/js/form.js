@@ -23,54 +23,47 @@ window.addEventListener("DOMContentLoaded", async (e) => {
             let id = localStorage.getItem("idAddForm")
             const doc = await getDocument(collection, id);
             tarjetasForm.innerHTML = "";
-            const dataForm = [doc.data()]
-
-            // for (let i = 0; i < 3; i++) {
-            //         console.log(doc.data()[i])
-            //     }
-
-
-            dataForm.forEach((target, index) =>{
-                
-                const targetDataForm = target[index+1];
+            const dataForm = doc.data();
+            const lenghtForm = Object.keys(dataForm).length
+            for (let i = 1; i <= lenghtForm; i++) {
+                const targetDataForm = dataForm[`${i}`];
                 if((targetDataForm).preguntaDepende=="Si"){
-                    $('#dependencia').append(
+                        $('#dependencia').append(
+                            `
+                            <p class="ms-3 text-capitalize">${targetDataForm.preguntaDepende}</p>
+                            <p class="ms-3 text-capitalize">${targetDataForm.preguntaDependiente}</p>
+                            <p class="ms-3 text-capitalize">${targetDataForm.respuestaDepende}</p>
+                            `
+                        )
+                    }
+                    $('#tarjetas-form').append(
                         `
-                        <p class="ms-3 text-capitalize">${targetDataForm.preguntaDepende}</p>
-                        <p class="ms-3 text-capitalize">${targetDataForm.preguntaDependiente}</p>
-                        <p class="ms-3 text-capitalize">${targetDataForm.respuestaDepende}</p>
+                        <div class="container tarjeta-sombra">
+                        <!-- targetas generadas -->
+            
+                        <p class="ms-3 text-capitalize">${targetDataForm.pregunta}</p>
+                        <p class="ms-3 text-capitalize">${targetDataForm.tipoRespuesta}</p>
+                        <div id="dependencia">
+                        
+                        </div>
+                        <div id="opciones">
+                        </div>
+                        <div class="d-grid gap-2 mx-auto ">
+                            <button class="btn btn-warning" type="button" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">editar</button>
+                            <button class="btn btn-danger mb-2" type="button">eliminar</button>
+                        </div>
+                        </div>
                         `
                     )
-                }
-                $('#tarjetas-form').append(
-                    `
-                    <div class="container tarjeta-sombra">
-                    <!-- targetas generadas -->
-        
-                    <p class="ms-3 text-capitalize">${targetDataForm.pregunta}</p>
-                    <p class="ms-3 text-capitalize">${targetDataForm.tipoRespuesta}</p>
-                    <div id="dependencia">
-                    
-                    </div>
-                    <div id="opciones">
-                    </div>
-                    <div class="d-grid gap-2 mx-auto ">
-                        <button class="btn btn-warning" type="button" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">editar</button>
-                        <button class="btn btn-danger mb-2" type="button">eliminar</button>
-                    </div>
-                    </div>
-                    `
-                )
-                targetDataForm.objetRespuestas.forEach(respuesta => {
-                    $('#opciones').append(`
-                    <p class="ms-3 tezt-capitalize">${respuesta}</p>
-                `)
-                });
-                
-                contPreguntas++
-            })
+                    targetDataForm.objetRespuestas.forEach(respuesta => {
+                        $('#opciones').append(`
+                        <p class="ms-3 tezt-capitalize">${respuesta}</p>
+                    `)
+                    });
+                    contPreguntas++
 
+            }
         } catch (error) {
             console.log(error);
         }
@@ -201,6 +194,7 @@ butttom.addEventListener('click', async (e) => {
     }
     const preguntasFormulario = {};
     preguntasFormulario[contPreguntas] =
+
     {
         pregunta: pregunta.value,
         tipoRespuesta: tipoRespuesta.value,
@@ -210,7 +204,7 @@ butttom.addEventListener('click', async (e) => {
         objetRespuestas
     }
     await updateDocument(collection, id, preguntasFormulario)
-
+    window.location.reload();
 
 })
 
@@ -220,12 +214,5 @@ $('#agregarPregunta').click(function (e) {
     console.log(contPreguntas)
 });
 
-function contarLetras(letras) {
-    var objeto = {};
-    for (var i in letras) {
-        objeto[letras[i]] = (objeto[letras[i]] || 0) + 1;
-    }
-    return objeto;
-}
 
 
