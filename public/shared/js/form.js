@@ -25,6 +25,7 @@ window.addEventListener("DOMContentLoaded", async (e) => {
             tarjetasForm.innerHTML = "";
             const dataForm = doc.data();
             const lenghtForm = Object.keys(dataForm).length
+            console.log(lenghtForm);
             for (let i = 1; i <= lenghtForm; i++) {
                 const targetDataForm = dataForm[`${i}`];
                 if((targetDataForm).preguntaDepende=="Si"){
@@ -38,7 +39,7 @@ window.addEventListener("DOMContentLoaded", async (e) => {
                     }
                     $('#tarjetas-form').append(
                         `
-                        <div class="container tarjeta-sombra">
+                        <div class="container tarjeta-sombra mt-4">
                         <!-- targetas generadas -->
             
                         <p class="ms-3 text-capitalize">${targetDataForm.pregunta}</p>
@@ -49,21 +50,48 @@ window.addEventListener("DOMContentLoaded", async (e) => {
                         <div id="opciones">
                         </div>
                         <div class="d-grid gap-2 mx-auto ">
-                            <button class="btn btn-warning" type="button" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">editar</button>
-                            <button class="btn btn-danger mb-2" type="button">eliminar</button>
+                            <button class="btn btn-warning update-question" type="button" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal" data-id=${targetDataForm}>editar</button>
+                            <button class="btn btn-danger mb-2 delete-question" type="button" data-id=${targetDataForm}>eliminar</button>
                         </div>
                         </div>
-                        `
+                        `  
                     )
                     targetDataForm.objetRespuestas.forEach(respuesta => {
                         $('#opciones').append(`
-                        <p class="ms-3 tezt-capitalize">${respuesta}</p>
+                        <p class="ms-3 tezt-capitalize">${respuesta}</p>    
                     `)
                     });
                     contPreguntas++
 
             }
+            const btnDeleteForm = document.querySelectorAll('.delete-question');
+            const btnUpdateForm = document.querySelectorAll('.update-question');
+
+            btnDeleteForm.forEach((btn)=>{
+                btn.addEventListener("click", async ({ target: { dataset } }) => {
+                    try {
+                        
+                        // await deleteDocuments(collection, dataset.id);
+                    }
+                    catch (error) {
+                        console.log(error);
+                    }
+                })
+            })
+            
+            btnUpdateForm.forEach((btn)=>{
+                
+                btn.addEventListener("click",async(e)=>{
+                    try{
+                        console.log(e);
+                        const doc = await getDocument(collection,e.target.dataset.id)
+0                    }catch(error){
+                        console.log(error)
+                    }
+                })
+            })
+
         } catch (error) {
             console.log(error);
         }
@@ -194,7 +222,6 @@ butttom.addEventListener('click', async (e) => {
     }
     const preguntasFormulario = {};
     preguntasFormulario[contPreguntas] =
-
     {
         pregunta: pregunta.value,
         tipoRespuesta: tipoRespuesta.value,
@@ -203,6 +230,7 @@ butttom.addEventListener('click', async (e) => {
         respuestaDepende: respuestaDepende.value,
         objetRespuestas
     }
+    console.log(preguntasFormulario)
     await updateDocument(collection, id, preguntasFormulario)
     window.location.reload();
 
