@@ -24,10 +24,10 @@ window.addEventListener("DOMContentLoaded", async (e) => {
             const doc = await getDocument(collection, id);
             tarjetasForm.innerHTML = "";
             const dataForm = doc.data();
-            const lenghtForm = Object.keys(dataForm).length
-            for (let i = 1; i <= lenghtForm; i++) {
-                const targetDataForm = dataForm[`${i}`];
-            console.log(targetDataForm)
+            // const lenghtForm = Object.keys(dataForm).length
+            const delta = Object.keys(dataForm)
+            for (let i = 0; i < delta.length; i++) {
+                const targetDataForm = dataForm[`${delta[i]}`];
                 if((targetDataForm).preguntaDepende=="Si"){
                         $('#dependencia').append(
                             `
@@ -47,18 +47,19 @@ window.addEventListener("DOMContentLoaded", async (e) => {
                         <div id="dependencia">
                         
                         </div>
-                        <div id="opciones">
+                        <div id="${i}">
                         </div>
                         <div class="d-grid gap-2 mx-auto ">
-                            <button class="btn btn-warning update-form"  data-id=${targetDataForm[0]} type="button" data-bs-toggle="modal"
+                            <button class="btn btn-warning update-form"  data-id=${delta[i]} type="button" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">editar</button>
-                            <button class="btn btn-danger mb-2 delete-form" data-id=${targetDataForm} type="button">eliminar</button>
+                            <button class="btn btn-danger mb-2 delete-form" data-id=${delta[i]} type="button">eliminar</button>
                         </div>
                         </div>
                         `
                     )
-                    targetDataForm.objetRespuestas.forEach(respuesta => {
-                        $('#opciones').append(`
+                    targetDataForm.objetRespuestas.forEach
+                    (respuesta => {
+                        $(`#${i}`).append(`
                         <p class="ms-3 tezt-capitalize">${respuesta}</p>
                     `)
                     });
@@ -81,7 +82,18 @@ window.addEventListener("DOMContentLoaded", async (e) => {
                     btnUpdateForm.forEach((btn)=>{
                         btn.addEventListener("click",async(e)=>{
                             try{
-                                console.log(e)
+                                const idTarget = e.target.dataset.id;
+
+                                const doc = await getDocument(collection, id);
+
+                                const query = doc.data()[`${idTarget}`];
+
+                                form['pregunta'].value = query.pregunta;
+                                form['tiporespuesta'].value = query.tipoRespuesta;
+                                form['preguntadepende'].value = query.preguntaDepende;
+                                form['preguntadependiente'].value = query.preguntaDependiente;
+                                form['respuestadepende'].value = query.respuestaDepende;
+
                             }catch(error){
                                 console.log(error)
                             }
