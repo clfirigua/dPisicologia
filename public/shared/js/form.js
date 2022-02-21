@@ -27,6 +27,7 @@ window.addEventListener("DOMContentLoaded", async (e) => {
             const lenghtForm = Object.keys(dataForm).length
             for (let i = 1; i <= lenghtForm; i++) {
                 const targetDataForm = dataForm[`${i}`];
+            console.log(targetDataForm)
                 if((targetDataForm).preguntaDepende=="Si"){
                         $('#dependencia').append(
                             `
@@ -49,9 +50,9 @@ window.addEventListener("DOMContentLoaded", async (e) => {
                         <div id="opciones">
                         </div>
                         <div class="d-grid gap-2 mx-auto ">
-                            <button class="btn btn-warning" type="button" data-bs-toggle="modal"
+                            <button class="btn btn-warning update-form"  data-id=${targetDataForm[0]} type="button" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">editar</button>
-                            <button class="btn btn-danger mb-2" type="button">eliminar</button>
+                            <button class="btn btn-danger mb-2 delete-form" data-id=${targetDataForm} type="button">eliminar</button>
                         </div>
                         </div>
                         `
@@ -63,7 +64,33 @@ window.addEventListener("DOMContentLoaded", async (e) => {
                     });
                     contPreguntas++
 
+                    const btnDeleteForm = document.querySelectorAll('.delete-form');
+                    const btnUpdateForm = document.querySelectorAll('.update-form');
+
+
+                    btnDeleteForm.forEach((btn)=>{
+                        btn.addEventListener("click", async ({ target: { dataset } }) => {
+                            try {
+                                console.log(dataset)
+                            }
+                            catch (error) {
+                                console.log(error);
+                            }
+                        })
+                    })
+                    btnUpdateForm.forEach((btn)=>{
+                        btn.addEventListener("click",async(e)=>{
+                            try{
+                                console.log(e)
+                            }catch(error){
+                                console.log(error)
+                            }
+                        })
+                    })
+
             }
+
+
         } catch (error) {
             console.log(error);
         }
@@ -99,11 +126,11 @@ const boton = (tipo) => {
             const btnDeleteTable = document.querySelectorAll('.eliminar');
             btnDeleteTable.forEach((btn) =>
                 btn.addEventListener("click", (e) => {
-                    e.preventDefault()
-                    const { id } = e.target.dataset
-                    const target = document.getElementById(id)
-                    multiple.removeChild(target);
-                    cont - 1;
+                    // e.preventDefault()
+                    // const { id } = e.target.dataset
+                    // const target = document.getElementById(id)
+                    // multiple.removeChild(target);
+                    // cont - 1;
                 })
             );
             cont++
@@ -201,6 +228,7 @@ butttom.addEventListener('click', async (e) => {
         preguntaDepende: preguntaDepende.value,
         preguntaDependiente: preguntaDependiente.value,
         respuestaDepende: respuestaDepende.value,
+        id:contPreguntas,
         objetRespuestas
     }
     await updateDocument(collection, id, preguntasFormulario)
