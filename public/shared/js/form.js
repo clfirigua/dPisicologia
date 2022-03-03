@@ -24,21 +24,23 @@ window.addEventListener("DOMContentLoaded", async (e) => {
             const doc = await getDocument(collection, id);
             tarjetasForm.innerHTML = "";
             const dataForm = doc.data();
-            // const lenghtForm = Object.keys(dataForm).length
             const delta = Object.keys(dataForm)
+            delta.map((item) => {
+                contPreguntas=item
+            });
             for (let i = 0; i < delta.length; i++) {
                 const targetDataForm = dataForm[`${delta[i]}`];
-                if((targetDataForm).preguntaDepende=="Si"){
-                        $('#dependencia').append(
-                            `
+                if ((targetDataForm).preguntaDepende == "Si") {
+                    $('#dependencia').append(
+                        `
                             <p class="ms-3 text-capitalize">${targetDataForm.preguntaDepende}</p>
                             <p class="ms-3 text-capitalize">${targetDataForm.preguntaDependiente}</p>
                             <p class="ms-3 text-capitalize">${targetDataForm.respuestaDepende}</p>
                             `
-                        )
-                    }
-                    $('#tarjetas-form').append(
-                        `
+                    )
+                }
+                $('#tarjetas-form').append(
+                    `
                         <div class="container tarjeta-sombra">
                         <!-- targetas generadas -->
             
@@ -56,49 +58,47 @@ window.addEventListener("DOMContentLoaded", async (e) => {
                         </div>
                         </div>
                         `
-                    )
-                    targetDataForm.objetRespuestas.forEach
-                    (respuesta => {
+                )
+                targetDataForm.objetRespuestas.forEach(respuesta => {
                         $(`#${i}`).append(`
                         <p class="ms-3 tezt-capitalize">${respuesta}</p>
                     `)
                     });
-                    contPreguntas++
 
-                    const btnDeleteForm = document.querySelectorAll('.delete-form');
-                    const btnUpdateForm = document.querySelectorAll('.update-form');
+                const btnDeleteForm = document.querySelectorAll('.delete-form');
+                const btnUpdateForm = document.querySelectorAll('.update-form');
 
 
-                    btnDeleteForm.forEach((btn)=>{
-                        btn.addEventListener("click", async ({ target: { dataset } }) => {
-                            try {
-                                console.log(dataset)
-                            }
-                            catch (error) {
-                                console.log(error);
-                            }
-                        })
+                btnDeleteForm.forEach((btn) => {
+                    btn.addEventListener("click", async ({ target: { dataset } }) => {
+                        try {
+                            console.log(dataset)
+                        }
+                        catch (error) {
+                            console.log(error);
+                        }
                     })
-                    btnUpdateForm.forEach((btn)=>{
-                        btn.addEventListener("click",async(e)=>{
-                            try{
-                                const idTarget = e.target.dataset.id;
+                })
+                btnUpdateForm.forEach((btn) => {
+                    btn.addEventListener("click", async (e) => {
+                        try {
+                            const idTarget = e.target.dataset.id;
 
-                                const doc = await getDocument(collection, id);
+                            const doc = await getDocument(collection, id);
 
-                                const query = doc.data()[`${idTarget}`];
+                            const query = doc.data()[`${idTarget}`];
 
-                                form['pregunta'].value = query.pregunta;
-                                form['tiporespuesta'].value = query.tipoRespuesta;
-                                form['preguntadepende'].value = query.preguntaDepende;
-                                form['preguntadependiente'].value = query.preguntaDependiente;
-                                form['respuestadepende'].value = query.respuestaDepende;
+                            form['pregunta'].value = query.pregunta;
+                            form['tiporespuesta'].value = query.tipoRespuesta;
+                            form['preguntadepende'].value = query.preguntaDepende;
+                            form['preguntadependiente'].value = query.preguntaDependiente;
+                            form['respuestadepende'].value = query.respuestaDepende;
 
-                            }catch(error){
-                                console.log(error)
-                            }
-                        })
+                        } catch (error) {
+                            console.log(error)
+                        }
                     })
+                })
 
             }
 
@@ -124,34 +124,33 @@ const boton = (tipo) => {
     const btn = document.getElementById('respuesta');
     btn.addEventListener('click', (event) => {
         event.preventDefault();
+        cont++
         if (tipo == "Opcion multiple") {
             const multiple = document.getElementById('multiple');
             $(multiple).append(
                 `
-                <div class="form-check opcion-respuesta" id="${cont}" >
+                <div class="form-check opcion-respuesta" id="+${cont}" >
                 <input type="text" class="inp-bottom-line" placeholder="opcion multiple">
                 <button class="btn btn-danger eliminar" data-id="${cont}">Eliminar</button>
                 </div>
-
                 `
             )
             const btnDeleteTable = document.querySelectorAll('.eliminar');
             btnDeleteTable.forEach((btn) =>
                 btn.addEventListener("click", (e) => {
-                    // e.preventDefault()
-                    // const { id } = e.target.dataset
-                    // const target = document.getElementById(id)
-                    // multiple.removeChild(target);
-                    // cont - 1;
+                    e.preventDefault()
+                    const { id } = e.target.dataset
+                    const target = document.getElementById(id)
+                    multiple.removeChild(target);
+                    cont - 1;
                 })
             );
-            cont++
         } else {
             if (tipo == "Opcion unica") {
                 const unica = document.getElementById("unica");
                 $(unica).append(
                     `
-                    <div class="form-check opcion-respuesta" id="${cont}">
+                    <div class="form-check opcion-respuesta" id="+${cont}">
                     <input type="text" class="inp-bottom-line" placeholder="opcion unica">
                     <button class="btn btn-danger eliminar" data-id="${cont}">Eliminar</button>
                     </div>
@@ -167,8 +166,6 @@ const boton = (tipo) => {
                         cont - 1;
                     })
                 );
-                cont++
-
             }
 
         }
@@ -219,13 +216,20 @@ tipoRespuesta.addEventListener("change", (e) => {
 })
 
 
+
+$('#agregarPregunta').click(function (e) {
+    e.preventDefault();
+    contPreguntas++
+});
+
+
 butttom.addEventListener('click', async (e) => {
     e.preventDefault();
-    const id = localStorage.getItem("idAddForm")
+    let id = localStorage.getItem("idAddForm")
     const objetRespuestas = [];
 
-    for (let i = 0; i < cont; i++) {
-        const data = document.getElementById(i);
+    for (let i = 1; i <= cont; i++) {
+        const data = document.getElementById("+"+i);
         const dataMin = data?.children[0]?.value;
         if (dataMin != undefined) {
             objetRespuestas.push(dataMin)
@@ -240,19 +244,12 @@ butttom.addEventListener('click', async (e) => {
         preguntaDepende: preguntaDepende.value,
         preguntaDependiente: preguntaDependiente.value,
         respuestaDepende: respuestaDepende.value,
-        id:contPreguntas,
         objetRespuestas
     }
     await updateDocument(collection, id, preguntasFormulario)
     window.location.reload();
 
 })
-
-$('#agregarPregunta').click(function (e) {
-    e.preventDefault();
-    contPreguntas++
-    console.log(contPreguntas)
-});
 
 
 
