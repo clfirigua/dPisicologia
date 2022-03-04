@@ -22,166 +22,15 @@ window.addEventListener("DOMContentLoaded", async (e) => {
         try {
             let id = localStorage.getItem("idAddForm")
             const doc = await getDocument(collection, id);
-<<<<<<< HEAD
-<<<<<<< HEAD
-            tarjetasForm.innerHTML = "";
-            const dataForm = doc.data();
-            const lenghtForm = Object.keys(dataForm).length
-            console.log(lenghtForm);
-            for (let i = 1; i <= lenghtForm; i++) {
-                const targetDataForm = dataForm[`${i}`];
-                if((targetDataForm).preguntaDepende=="Si"){
-                        $('#dependencia').append(
-                            `
-=======
-            tarjetasForm.innerHTML = "";
-            const dataForm = doc.data();
-            const delta = Object.keys(dataForm)
-            delta.map((item) => {
-                contPreguntas=item
-            });
-            for (let i = 0; i < delta.length; i++) {
-                const targetDataForm = dataForm[`${delta[i]}`];
-                if ((targetDataForm).preguntaDepende == "Si") {
-                    $('#dependencia').append(
-                        `
->>>>>>> parent of c333af0... añadir la edicion de los formularios
-                            <p class="ms-3 text-capitalize">${targetDataForm.preguntaDepende}</p>
-                            <p class="ms-3 text-capitalize">${targetDataForm.preguntaDependiente}</p>
-                            <p class="ms-3 text-capitalize">${targetDataForm.respuestaDepende}</p>
-                            `
-<<<<<<< HEAD
-                        )
-                    }
-                    $('#tarjetas-form').append(
-                        `
-                        <div class="container tarjeta-sombra mt-4">
-=======
-                    )
-                }
-                $('#tarjetas-form').append(
-                    `
-                        <div class="container tarjeta-sombra">
->>>>>>> parent of c333af0... añadir la edicion de los formularios
-                        <!-- targetas generadas -->
-            
-                        <p class="ms-3 text-capitalize">${targetDataForm.pregunta}</p>
-                        <p class="ms-3 text-capitalize">${targetDataForm.tipoRespuesta}</p>
-                        <div id="dependencia">
-                        
-                        </div>
-<<<<<<< HEAD
-                        <div id="opciones">
-                        </div>
-                        <div class="d-grid gap-2 mx-auto ">
-                            <button class="btn btn-warning update-question" type="button" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal" data-id=${targetDataForm}>editar</button>
-                            <button class="btn btn-danger mb-2 delete-question" type="button" data-id=${targetDataForm}>eliminar</button>
-                        </div>
-                        </div>
-                        `  
-                    )
-                    targetDataForm.objetRespuestas.forEach(respuesta => {
-                        $('#opciones').append(`
-                        <p class="ms-3 tezt-capitalize">${respuesta}</p>    
-                    `)
-                    });
-                    contPreguntas++
-
-            }
-            const btnDeleteForm = document.querySelectorAll('.delete-question');
-            const btnUpdateForm = document.querySelectorAll('.update-question');
-
-            btnDeleteForm.forEach((btn)=>{
-                btn.addEventListener("click", async ({ target: { dataset } }) => {
-                    try {
-                        
-                        // await deleteDocuments(collection, dataset.id);
-                    }
-                    catch (error) {
-                        console.log(error);
-                    }
-                })
-            })
-            
-            btnUpdateForm.forEach((btn)=>{
-                
-                btn.addEventListener("click",async(e)=>{
-                    try{
-                        console.log(e);
-                        const doc = await getDocument(collection,e.target.dataset.id)
-0                    }catch(error){
-                        console.log(error)
-                    }
-                })
-            })
-
-=======
             mostrarTarjetas(doc,id)
->>>>>>> master
-=======
-                        <div id="${i}">
-                        </div>
-                        <div class="d-grid gap-2 mx-auto ">
-                            <button class="btn btn-warning update-form"  data-id=${delta[i]} type="button" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">editar</button>
-                            <button class="btn btn-danger mb-2 delete-form" data-id=${delta[i]} type="button">eliminar</button>
-                        </div>
-                        </div>
-                        `
-                )
-                targetDataForm.objetRespuestas.forEach(respuesta => {
-                        $(`#${i}`).append(`
-                        <p class="ms-3 tezt-capitalize">${respuesta}</p>
-                    `)
-                    });
-
-                const btnDeleteForm = document.querySelectorAll('.delete-form');
-                const btnUpdateForm = document.querySelectorAll('.update-form');
-
-
-                btnDeleteForm.forEach((btn) => {
-                    btn.addEventListener("click", async ({ target: { dataset } }) => {
-                        try {
-                            console.log(dataset)
-                        }
-                        catch (error) {
-                            console.log(error);
-                        }
-                    })
-                })
-                btnUpdateForm.forEach((btn) => {
-                    btn.addEventListener("click", async (e) => {
-                        try {
-                            const idTarget = e.target.dataset.id;
-
-                            const doc = await getDocument(collection, id);
-
-                            const query = doc.data()[`${idTarget}`];
-
-                            form['pregunta'].value = query.pregunta;
-                            form['tiporespuesta'].value = query.tipoRespuesta;
-                            form['preguntadepende'].value = query.preguntaDepende;
-                            form['preguntadependiente'].value = query.preguntaDependiente;
-                            form['respuestadepende'].value = query.respuestaDepende;
-
-                        } catch (error) {
-                            console.log(error)
-                        }
-                    })
-                })
-
-            }
-
-
->>>>>>> parent of c333af0... añadir la edicion de los formularios
         } catch (error) {
             console.log(error);
         }
     } else {
         try {
-            const doc = await getDocument(collection, localStorage.getItem("idUpdateForm"))
-            const preguntas = doc.data();
+            let id = localStorage.getItem("idUpdateForm")
+            const doc = await getDocument(collection, id)
+            mostrarTarjetas(doc,id)
 
         } catch (error) {
             console.log(error);
@@ -301,7 +150,7 @@ butttom.addEventListener('click', async (e) => {
     const objetRespuestas = [];
 
     for (let i = 1; i <= cont; i++) {
-        const data = document.getElementById("+"+i);
+        const data = document.getElementById("+" + i);
         const dataMin = data?.children[0]?.value;
         if (dataMin != undefined) {
             objetRespuestas.push(dataMin)
@@ -309,6 +158,7 @@ butttom.addEventListener('click', async (e) => {
     }
     const preguntasFormulario = {};
     preguntasFormulario[contPreguntas] =
+
     {
         pregunta: pregunta.value,
         tipoRespuesta: tipoRespuesta.value,
@@ -317,7 +167,6 @@ butttom.addEventListener('click', async (e) => {
         respuestaDepende: respuestaDepende.value,
         objetRespuestas
     }
-    console.log(preguntasFormulario)
     await updateDocument(collection, id, preguntasFormulario)
     window.location.reload();
 
@@ -325,3 +174,85 @@ butttom.addEventListener('click', async (e) => {
 
 
 
+function mostrarTarjetas(doc,id) {
+    tarjetasForm.innerHTML = "";
+    const dataForm = doc.data();
+    const delta = Object.keys(dataForm)
+    delta.map((item) => {
+        contPreguntas = item
+    });
+    for (let i = 0; i < delta.length; i++) {
+        const targetDataForm = dataForm[`${delta[i]}`];
+        if ((targetDataForm).preguntaDepende == "Si") {
+            $('#dependencia').append(
+                `
+                    <p class="ms-3 text-capitalize">${targetDataForm.preguntaDepende}</p>
+                    <p class="ms-3 text-capitalize">${targetDataForm.preguntaDependiente}</p>
+                    <p class="ms-3 text-capitalize">${targetDataForm.respuestaDepende}</p>
+                    `
+            )
+        }
+        $('#tarjetas-form').append(
+            `
+                <div class="container tarjeta-sombra">
+                <!-- targetas generadas -->
+    
+                <p class="ms-3 text-capitalize">${targetDataForm.pregunta}</p>
+                <p class="ms-3 text-capitalize">${targetDataForm.tipoRespuesta}</p>
+                <div id="dependencia">
+                
+                </div>
+                <div id="${i}">
+                </div>
+                <div class="d-grid gap-2 mx-auto ">
+                    <button class="btn btn-warning update-form"  data-id=${delta[i]} type="button" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">editar</button>
+                    <button class="btn btn-danger mb-2 delete-form" data-id=${delta[i]} type="button">eliminar</button>
+                </div>
+                </div>
+                `
+        )
+        targetDataForm.objetRespuestas.forEach(respuesta => {
+            $(`#${i}`).append(`
+                <p class="ms-3 tezt-capitalize">${respuesta}</p>
+            `)
+        });
+
+        
+    }
+    const btnDeleteForm = document.querySelectorAll('.delete-form');
+        const btnUpdateForm = document.querySelectorAll('.update-form');
+
+
+        btnDeleteForm.forEach((btn) => {
+            btn.addEventListener("click", async ({ target: { dataset } }) => {
+                try {
+                    console.log(dataset)
+                }
+                catch (error) {
+                    console.log(error);
+                }
+            })
+        })
+        btnUpdateForm.forEach((btn) => {
+            btn.addEventListener("click", async (e) => {
+                try {
+                    const idTarget = e.target.dataset.id;
+
+                    const doc = await getDocument(collection, id);
+
+                    const query = doc.data()[`${idTarget}`];
+
+                    form['pregunta'].value = query.pregunta;
+                    form['tiporespuesta'].value = query.tipoRespuesta;
+                    form['preguntadepende'].value = query.preguntaDepende;
+                    form['preguntadependiente'].value = query.preguntaDependiente;
+                    form['respuestadepende'].value = query.respuestaDepende;
+
+                } catch (error) {
+                    console.log(error)
+                }
+            })
+        })
+
+}
